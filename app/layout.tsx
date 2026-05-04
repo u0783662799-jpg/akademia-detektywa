@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Archivo_Black, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,14 +36,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Akademia Małego Detektywa | Zagadki dla dzieci 8-12 lat",
-    description: "Detektywistyczne teczki, szyfry i zagadki dla dzieci 8-12 lat. Darmowy PDF i papierowe sprawy premium.",
+    description:
+      "Detektywistyczne teczki, szyfry i zagadki dla dzieci 8-12 lat. Darmowy PDF i papierowe sprawy premium.",
     type: "website",
     locale: "pl_PL"
   },
   twitter: {
     card: "summary_large_image",
     title: "Akademia Małego Detektywa",
-    description: "Papierowe zagadki detektywistyczne i sprawy premium dla dzieci 8-12 lat."
+    description:
+      "Papierowe zagadki detektywistyczne i sprawy premium dla dzieci 8-12 lat."
   }
 };
 
@@ -52,8 +55,25 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={`${inter.variable} ${archivo.variable} bg-cream font-sans text-ink`}>
         {children}
 
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V817XGHG8Q"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V817XGHG8Q');
+          `}
+        </Script>
+
         {/* MailerLite script */}
-        <script src="https://groot.mailerlite.com/js/w/webforms.min.js" defer></script>
+        <Script
+          src="https://groot.mailerlite.com/js/w/webforms.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
