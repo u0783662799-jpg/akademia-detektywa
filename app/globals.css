@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-8;
+  }
+
+  .section {
+    @apply py-10 sm:py-16;
+  }
+
+  .eyebrow {
+    @apply mb-3 text-xs font-black uppercase tracking-normal text-gold;
+  }
+
+  .title {
+    @apply font-display text-[1.9rem] uppercase leading-tight sm:text-4xl;
+  }
+
+  .btn {
+    @apply inline-flex h-11 items-center justify-center rounded-lg bg-gold px-5 text-[0.72rem] font-black uppercase text-navy shadow-[0_6px_0_rgba(139,83,10,0.25)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_0_rgba(139,83,10,0.25)] sm:text-xs;
+  }
+
+  .dark-btn {
+    @apply inline-flex h-11 items-center justify-center rounded-lg bg-navy px-5 text-[0.72rem] font-black uppercase text-white transition hover:-translate-y-0.5 sm:text-xs;
+  }
+}
+
+.detective-bg {
+  background:
+    radial-gradient(circle at 72% 18%, rgba(247, 183, 45, 0.16), transparent 18rem),
+    radial-gradient(circle at 18% 72%, rgba(232, 121, 34, 0.1), transparent 16rem),
+    linear-gradient(135deg, #051321 0%, #0a2233 58%, #07131f 100%);
+}
+
+.hero-full {
+  background: linear-gradient(135deg, #051321 0%, #0a2233 58%, #07131f 100%);
+}
+
+@media (max-width: 639px) {
+  .hero-full {
+    min-height: 0;
+  }
+}
+
+.paper-bg {
+  background:
+    radial-gradient(circle at 18px 18px, rgba(89, 58, 24, 0.06) 0 2px, transparent 3px),
+    #f7ead1;
+  background-size: 46px 46px, auto;
+}
+
+.case-folder {
+  background:
+    linear-gradient(90deg, rgba(83, 51, 21, 0.08) 1px, transparent 1px),
+    linear-gradient(#d8a45d, #c58a42);
+  background-size: 18px 18px, auto;
+}
+
+.clue-paper {
+  background:
+    linear-gradient(90deg, rgba(83, 51, 21, 0.07) 1px, transparent 1px),
+    #f8e8c9;
+  background-size: 14px 14px, auto;
+}
+
+.paw-trail {
+  background:
+    radial-gradient(circle at 12% 78%, #f7b72d 0 5px, transparent 6px),
+    radial-gradient(circle at 20% 58%, #f7b72d 0 3px, transparent 4px),
+    radial-gradient(circle at 28% 67%, #f7b72d 0 3px, transparent 4px),
+    radial-gradient(circle at 44% 48%, #f7b72d 0 5px, transparent 6px),
+    radial-gradient(circle at 52% 28%, #f7b72d 0 3px, transparent 4px),
+    radial-gradient(circle at 60% 38%, #f7b72d 0 3px, transparent 4px),
+    radial-gradient(circle at 78% 28%, #f7b72d 0 5px, transparent 6px),
+    radial-gradient(circle at 86% 8%, #f7b72d 0 3px, transparent 4px),
+    radial-gradient(circle at 94% 18%, #f7b72d 0 3px, transparent 4px);
+}
+
+.paw-dot {
+  background:
+    radial-gradient(circle at 50% 62%, #e87922 0 8px, transparent 9px),
+    radial-gradient(circle at 30% 32%, #e87922 0 4px, transparent 5px),
+    radial-gradient(circle at 50% 24%, #e87922 0 4px, transparent 5px),
+    radial-gradient(circle at 70% 32%, #e87922 0 4px, transparent 5px);
+}
