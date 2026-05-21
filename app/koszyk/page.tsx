@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { SITE_URL } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Koszyk",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  alternates: {
+    canonical: `${SITE_URL}/koszyk`,
+  },
+};
 
 export default function CartPage() {
 

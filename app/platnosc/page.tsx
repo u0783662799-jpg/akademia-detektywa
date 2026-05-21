@@ -1,7 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { SITE_URL } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Płatność",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  alternates: {
+    canonical: `${SITE_URL}/platnosc`,
+  },
+};
 
 export default function CheckoutPage() {
   return (

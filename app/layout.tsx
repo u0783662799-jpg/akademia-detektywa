@@ -1,79 +1,107 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import { Archivo_Black, Inter } from "next/font/google";
+import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
+import { DEFAULT_META, SITE_URL, schemaOrganization, schemaWebSite } from "@/lib/seo";
+import CookieBanner from "@/components/CookieBanner";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-const inter = Inter({
-  subsets: ["latin-ext"],
-  variable: "--font-sans",
-  display: "swap"
-});
-
-const archivo = Archivo_Black({
-  weight: "400",
-  subsets: ["latin-ext"],
-  variable: "--font-display",
-  display: "swap"
-});
+const gaMeasurementId =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-V817XGHG8Q";
 
 export const metadata: Metadata = {
-  title: "Akademia Małego Detektywa | Zagadki dla dzieci 8-12 lat",
-  description:
-    "Gotowe papierowe zagadki detektywistyczne dla dzieci. Pobierz darmową sprawę PDF i poznaj Akademię Małego Detektywa.",
-  keywords: [
-    "zagadki dla dzieci",
-    "detektywistyczne zagadki",
-    "teczka detektywa",
-    "zabawa bez ekranu",
-    "gry dla dzieci 8-12 lat",
-    "Akademia Małego Detektywa"
-  ],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_META.title,
+    template: "%s | Akademia Małego Detektywa",
+  },
+  description: DEFAULT_META.description,
+  keywords: DEFAULT_META.keywords,
   authors: [{ name: "Akademia Małego Detektywa" }],
+  creator: "Akademia Małego Detektywa",
+  publisher: "Akademia Małego Detektywa",
   robots: {
     index: true,
-    follow: true
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  alternates: {
+    canonical: SITE_URL,
+    languages: { "pl-PL": SITE_URL },
   },
   openGraph: {
-    title: "Akademia Małego Detektywa | Zagadki dla dzieci 8-12 lat",
-    description:
-      "Detektywistyczne teczki, szyfry i zagadki dla dzieci 8-12 lat. Darmowy PDF i papierowe sprawy premium.",
     type: "website",
-    locale: "pl_PL"
+    locale: "pl_PL",
+    url: SITE_URL,
+    siteName: "Akademia Małego Detektywa",
+    title: DEFAULT_META.title,
+    description: DEFAULT_META.description,
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Akademia Małego Detektywa – zagadki detektywistyczne dla dzieci 8–12 lat",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akademia Małego Detektywa",
-    description:
-      "Papierowe zagadki detektywistyczne i sprawy premium dla dzieci 8-12 lat."
-  }
+    title: DEFAULT_META.title,
+    description: DEFAULT_META.description,
+    images: [`${SITE_URL}/og-image.png`],
+    creator: "@malydetektyw",
+  },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl">
-      <body className={`${inter.variable} ${archivo.variable} bg-cream font-sans text-ink`}>
+      <head>
+        <link rel="icon" type="image/png" href="/icon.png" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrganization) }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaWebSite) }}
+        />
+      </head>
+
+      <body className="font-sans antialiased bg-cream text-navy">
+        {gaMeasurementId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('consent', 'default', {
+                  analytics_storage: 'denied',
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied'
+                });
+                gtag('config', '${gaMeasurementId}', { send_page_view: false });
+              `}
+            </Script>
+            <Suspense fallback={null}>
+              <GoogleAnalytics />
+            </Suspense>
+          </>
+        ) : null}
+
         {children}
 
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-V817XGHG8Q"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-V817XGHG8Q');
-          `}
-        </Script>
-
-        {/* MailerLite script */}
-        <Script
-          src="https://groot.mailerlite.com/js/w/webforms.min.js"
-          strategy="afterInteractive"
-        />
+        <CookieBanner />
       </body>
     </html>
   );
