@@ -3,11 +3,9 @@ import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
 import { DEFAULT_META, SITE_URL, schemaOrganization, schemaWebSite } from "@/lib/seo";
+import { GTM_ID } from "@/lib/analytics";
 import CookieBanner from "@/components/CookieBanner";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
-
-const gaMeasurementId =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-V817XGHG8Q";
+import Analytics from "@/components/Analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -72,29 +70,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="font-sans antialiased bg-cream text-navy">
-        {gaMeasurementId ? (
+        {GTM_ID ? (
           <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
+            <Script id="gtm-loader" strategy="beforeInteractive">
               {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = gtag;
-                gtag('js', new Date());
-                gtag('consent', 'default', {
-                  analytics_storage: 'denied',
-                  ad_storage: 'denied',
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied'
-                });
-                gtag('config', '${gaMeasurementId}', { send_page_view: false });
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${GTM_ID}');
               `}
             </Script>
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+                height="0"
+                width="0"
+                style={{ display: "none", visibility: "hidden" }}
+                title="Google Tag Manager"
+              />
+            </noscript>
             <Suspense fallback={null}>
-              <GoogleAnalytics />
+              <Analytics />
             </Suspense>
           </>
         ) : null}

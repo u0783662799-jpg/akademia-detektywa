@@ -2,6 +2,7 @@
 
 import CookieConsent from "react-cookie-consent";
 import Link from "next/link";
+import { CONSENT_COOKIE_EXPIRES_DAYS, CONSENT_COOKIE_NAME } from "@/lib/analytics";
 
 export default function CookieBanner() {
   return (
@@ -10,7 +11,7 @@ export default function CookieBanner() {
       buttonText="Akceptuję"
       declineButtonText="Odrzuć"
       enableDeclineButton
-      cookieName="amd_cookie_consent"
+      cookieName={CONSENT_COOKIE_NAME}
       style={{
         background: "#061928",
         color: "#f8f3e7",
@@ -34,7 +35,7 @@ export default function CookieBanner() {
         padding: "10px 18px",
         fontWeight: "600",
       }}
-      expires={180}
+      expires={CONSENT_COOKIE_EXPIRES_DAYS}
       onAccept={() => {
         window.dispatchEvent(new Event("amd:consent-granted"));
       }}
