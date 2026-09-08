@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   GTM_ID,
+  flushQueuedNavigationCtaEvent,
   hasAnalyticsConsent,
   pushAnalyticsEvent,
   pushConsentUpdate,
@@ -96,6 +97,7 @@ export default function Analytics() {
     if (!hasAnalyticsConsent()) return;
 
     consentGrantedRef.current = true;
+    flushQueuedNavigationCtaEvent();
 
     const query = searchParams?.toString();
     const url = query ? `${pathname}?${query}` : pathname;

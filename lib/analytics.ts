@@ -3,6 +3,8 @@ export const CONSENT_COOKIE_NAME = "amd_cookie_consent";
 export const CONSENT_COOKIE_ACCEPTED = `${CONSENT_COOKIE_NAME}=true`;
 export const CONSENT_COOKIE_EXPIRES_DAYS = 180;
 export const ANALYTICS_NAVIGATION_DELAY_MS = 200;
+const NAVIGATION_CTA_STORAGE_KEY = "amd_pending_navigation_cta";
+const NAVIGATION_CTA_MAX_AGE_MS = 30_000;
 
 export type DataLayerValue = string | number | boolean | undefined;
 
@@ -10,6 +12,11 @@ export type AnalyticsInteractionParams = {
   event_category?: DataLayerValue;
   event_label?: DataLayerValue;
   location?: DataLayerValue;
+};
+
+type QueuedNavigationCtaEvent = AnalyticsInteractionParams & {
+  eventName: "click_download_puzzle";
+  createdAt: number;
 };
 
 export type AmdDataLayerEvent =
@@ -76,10 +83,58 @@ export function pushAnalyticsEvent(
   eventName: "click_download_puzzle" | "generate_lead",
   params: AnalyticsInteractionParams,
 ) {
-  if (!hasAnalyticsConsent()) return;
+  if (!hasAnalyticsConsent()) return false;
 
   pushDataLayer({
     event: eventName === "generate_lead" ? "amd_generate_lead" : "amd_click_download_puzzle",
     ...params,
+  });
+
+  return true;
+}
+
+export function queueNavigationCtaEvent(params: AnalyticsInteractionParams) {
+  if (typeof window === "undefined" || !hasAnalyticsConsent()) return false;
+
+  const queuedEvent: QueuedNavigationCtaEvent = {
+    eventName: "click_download_puzzle",
+    createdAt: Date.now(),
+    ...params,
+  };
+
+  try {
+    window.sessionStorage.setItem(NAVIGATION_CTA_STORAGE_KEY, JSON.stringify(queuedEvent));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function flushQueuedNavigationCtaEvent() {
+  if (typeof window === "undefined" || !hasAnalyticsConsent()) return false;
+
+  let queuedEvent: QueuedNavigationCtaEvent;
+
+  try {
+    const rawEvent = window.sessionStorage.getItem(NAVIGATION_CTA_STORAGE_KEY);
+    if (!rawEvent) return false;
+
+    window.sessionStorage.removeItem(NAVIGATION_CTA_STORAGE_KEY);
+    queuedEvent = JSON.parse(rawEvent) as QueuedNavigationCtaEvent;
+  } catch {
+    return false;
+  }
+
+  if (
+    queuedEvent.eventName !== "click_download_puzzle" ||
+    Date.now() - queuedEvent.createdAt > NAVIGATION_CTA_MAX_AGE_MS
+  ) {
+    return false;
+  }
+
+  return pushAnalyticsEvent("click_download_puzzle", {
+    event_category: queuedEvent.event_category,
+    event_label: queuedEvent.event_label,
+    location: queuedEvent.location,
   });
 }

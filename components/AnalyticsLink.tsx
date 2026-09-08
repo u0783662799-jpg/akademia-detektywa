@@ -7,6 +7,7 @@ import {
   ANALYTICS_NAVIGATION_DELAY_MS,
   hasAnalyticsConsent,
   pushAnalyticsEvent,
+  queueNavigationCtaEvent,
 } from "@/lib/analytics";
 
 type AnalyticsLinkProps = Omit<ComponentProps<typeof Link>, "href" | "onClick"> & {
@@ -52,15 +53,28 @@ export default function AnalyticsLink({
     event.preventDefault();
     event.stopPropagation();
 
-    pushAnalyticsEvent("click_download_puzzle", {
+    let navigationStarted = false;
+    const continueNavigation = () => {
+      if (navigationStarted) return;
+      navigationStarted = true;
+      router.push(href);
+    };
+
+    const eventQueued = queueNavigationCtaEvent({
       event_category: analyticsCategory,
       event_label: analyticsLabel,
       location: analyticsLocation,
     });
 
-    window.setTimeout(() => {
-      router.push(href);
-    }, analyticsDelayMs);
+    if (!eventQueued) {
+      pushAnalyticsEvent("click_download_puzzle", {
+        event_category: analyticsCategory,
+        event_label: analyticsLabel,
+        location: analyticsLocation,
+      });
+    }
+
+    window.setTimeout(continueNavigation, analyticsDelayMs);
   };
 
   return (
