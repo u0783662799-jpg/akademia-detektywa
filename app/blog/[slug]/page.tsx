@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { articles } from "../page";
+import { articles } from "../articles";
 import { SITE_URL } from "@/lib/seo";
 
 interface Props {

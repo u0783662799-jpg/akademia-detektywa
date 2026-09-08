@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import AnalyticsLink from "@/components/AnalyticsLink";
 import { DEFAULT_META, SITE_URL, schemaFAQHome } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -155,16 +156,15 @@ export default function HomePage() {
             </li>
           </ul>
 
-          <Link
+          <AnalyticsLink
             href="/darmowa-zagadka"
             className="rounded-full bg-gold px-4 py-2 text-sm font-bold text-navy transition-colors hover:bg-orange sm:px-5"
-            data-analytics-event="click_download_puzzle"
-            data-analytics-category="lead"
-            data-analytics-label="header_darmowy_pdf"
-            data-analytics-location="header"
+            analyticsCategory="lead"
+            analyticsLabel="header_darmowy_pdf"
+            analyticsLocation="header"
           >
             Darmowy PDF
-          </Link>
+          </AnalyticsLink>
         </nav>
       </header>
 
@@ -196,16 +196,15 @@ export default function HomePage() {
             </p>
 
             <div className="flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:gap-4">
-              <Link
+              <AnalyticsLink
                 href="/darmowa-zagadka"
                 className="rounded-full bg-gold px-6 py-3.5 text-center text-base font-bold text-navy shadow-soft transition-colors hover:bg-orange sm:px-8 sm:py-4 sm:text-lg"
-                data-analytics-event="click_download_puzzle"
-                data-analytics-category="lead"
-                data-analytics-label="hero_pobierz_pdf"
-                data-analytics-location="home_hero"
+                analyticsCategory="lead"
+                analyticsLabel="hero_pobierz_pdf"
+                analyticsLocation="home_hero"
               >
                 Pobierz darmową zagadkę PDF
-              </Link>
+              </AnalyticsLink>
               <Link
                 href="/sklep"
                 className="rounded-full border border-cream/40 px-6 py-3.5 text-center text-base font-semibold text-cream transition-colors hover:border-gold hover:text-gold sm:px-8 sm:py-4 sm:text-lg"
@@ -247,16 +246,15 @@ export default function HomePage() {
                 finałowym. Idealna, żeby sprawdzić, czy Twoje dziecko pokocha
                 świat śledztw FOX-a.
               </p>
-              <Link
+              <AnalyticsLink
                 href="/darmowa-zagadka"
                 className="inline-block rounded-full bg-gold px-8 py-4 text-lg font-bold text-navy shadow-soft transition-colors hover:bg-orange"
-                data-analytics-event="click_download_puzzle"
-                data-analytics-category="lead"
-                data-analytics-label="home_pdf_section"
-                data-analytics-location="home_pdf_section"
+                analyticsCategory="lead"
+                analyticsLabel="home_pdf_section"
+                analyticsLocation="home_pdf_section"
               >
                 Pobierz darmową zagadkę →
-              </Link>
+              </AnalyticsLink>
             </div>
 
             <div className="flex justify-center">
@@ -421,16 +419,15 @@ export default function HomePage() {
               Nowe sprawy, kody rabatowe i darmowe PDF-y prosto na Twoją
               skrzynkę.
             </p>
-            <Link
+            <AnalyticsLink
               href="/darmowa-zagadka"
               className="inline-block rounded-full bg-gold px-8 py-4 text-lg font-bold text-navy shadow-soft transition-colors hover:bg-orange sm:px-10"
-              data-analytics-event="click_download_puzzle"
-              data-analytics-category="lead"
-              data-analytics-label="home_newsletter_cta"
-              data-analytics-location="home_newsletter"
+              analyticsCategory="lead"
+              analyticsLabel="home_newsletter_cta"
+              analyticsLocation="home_newsletter"
             >
               Odbierz darmową sprawę PDF
-            </Link>
+            </AnalyticsLink>
             <p className="mt-4 text-xs leading-relaxed text-cream/50">
               Zapisując się, akceptujesz{" "}
               <Link

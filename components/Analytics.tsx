@@ -2,17 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-
-declare global {
-  interface Window {
-    dataLayer: unknown[];
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
-const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-V817XGHG8Q";
-const CONSENT_COOKIE = "amd_cookie_consent=true";
+import {
+  GTM_ID,
+  flushQueuedNavigationCtaEvent,
+  hasAnalyticsConsent,
+  pushAnalyticsEvent,
+  pushConsentUpdate,
+  pushPageView,
+} from "@/lib/analytics";
 
 type AnalyticsEventDetail = {
   eventName?: string;
@@ -21,38 +18,7 @@ type AnalyticsEventDetail = {
   location?: string;
 };
 
-function updateConsent(granted: boolean) {
-  if (!window.gtag) return;
-
-  window.gtag("consent", "update", {
-    analytics_storage: granted ? "granted" : "denied",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-  });
-}
-
-function sendPageView(url: string) {
-  if (!GA_MEASUREMENT_ID || !window.gtag) return;
-
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    page_path: url,
-    page_location: window.location.href,
-    page_title: document.title,
-  });
-}
-
-function sendEvent(
-  eventName: string,
-  params: Record<string, string | number | boolean | undefined> = {},
-) {
-  if (!GA_MEASUREMENT_ID || !window.gtag) return;
-  if (!document.cookie.includes(CONSENT_COOKIE)) return;
-
-  window.gtag("event", eventName, params);
-}
-
-export default function GoogleAnalytics() {
+export default function Analytics() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const consentGrantedRef = useRef(false);
@@ -65,29 +31,33 @@ export default function GoogleAnalytics() {
     if (lastPageViewUrlRef.current === url) return;
 
     lastPageViewUrlRef.current = url;
-    sendPageView(url);
+    pushPageView(url);
   };
 
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID || typeof window === "undefined") return;
+    if (!GTM_ID || typeof window === "undefined") return;
 
     const grant = () => {
       consentGrantedRef.current = true;
-      updateConsent(true);
+      pushConsentUpdate(true);
       sendTrackedPageView();
     };
 
     const deny = () => {
       consentGrantedRef.current = false;
-      updateConsent(false);
+      lastPageViewUrlRef.current = null;
+      window.__amdLastPageViewUrl = null;
+      pushConsentUpdate(false);
     };
 
     const handleClick = (event: Event) => {
       const target = event.target as HTMLElement | null;
       const trackedElement = target?.closest<HTMLElement>("[data-analytics-event]");
       if (!trackedElement) return;
+      if (trackedElement.dataset.analyticsManagedNavigation === "true") return;
+      if (trackedElement.dataset.analyticsEvent !== "click_download_puzzle") return;
 
-      sendEvent(trackedElement.dataset.analyticsEvent || "click", {
+      pushAnalyticsEvent("click_download_puzzle", {
         event_category: trackedElement.dataset.analyticsCategory,
         event_label: trackedElement.dataset.analyticsLabel,
         location: trackedElement.dataset.analyticsLocation,
@@ -97,8 +67,8 @@ export default function GoogleAnalytics() {
     const handleLeadSuccess = (event: Event) => {
       const detail = (event as CustomEvent<AnalyticsEventDetail>).detail || {};
 
-      sendEvent(detail.eventName || "generate_lead", {
-        event_category: detail.event_category,
+      pushAnalyticsEvent("generate_lead", {
+        event_category: detail.event_category || "lead",
         event_label: detail.event_label,
         location: detail.location,
       });
@@ -109,11 +79,9 @@ export default function GoogleAnalytics() {
     window.addEventListener("amd:lead-success", handleLeadSuccess);
     document.addEventListener("click", handleClick);
 
-    if (document.cookie.includes(CONSENT_COOKIE)) {
+    if (hasAnalyticsConsent()) {
       consentGrantedRef.current = true;
-      updateConsent(true);
-    } else {
-      deny();
+      pushConsentUpdate(true);
     }
 
     return () => {
@@ -125,8 +93,11 @@ export default function GoogleAnalytics() {
   }, []);
 
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID || typeof window === "undefined") return;
-    if (!document.cookie.includes(CONSENT_COOKIE)) return;
+    if (!GTM_ID || typeof window === "undefined") return;
+    if (!hasAnalyticsConsent()) return;
+
+    consentGrantedRef.current = true;
+    flushQueuedNavigationCtaEvent();
 
     const query = searchParams?.toString();
     const url = query ? `${pathname}?${query}` : pathname;
@@ -134,7 +105,7 @@ export default function GoogleAnalytics() {
     if (lastPageViewUrlRef.current === url) return;
 
     lastPageViewUrlRef.current = url;
-    sendPageView(url);
+    pushPageView(url);
   }, [pathname, searchParams]);
 
   return null;
