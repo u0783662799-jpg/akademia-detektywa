@@ -2,9 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { CONSENT_COOKIE_ACCEPTED, GTM_ID } from "@/lib/analytics";
-
-type DataLayerValue = string | number | boolean | undefined;
+import {
+  GTM_ID,
+  hasAnalyticsConsent,
+  pushAnalyticsEvent,
+  pushConsentUpdate,
+  pushPageView,
+} from "@/lib/analytics";
 
 type AnalyticsEventDetail = {
   eventName?: string;
@@ -12,82 +16,6 @@ type AnalyticsEventDetail = {
   event_label?: string;
   location?: string;
 };
-
-type InteractionParams = {
-  event_category?: DataLayerValue;
-  event_label?: DataLayerValue;
-  location?: DataLayerValue;
-};
-
-type AmdDataLayerEvent =
-  | {
-      event: "amd_consent_update";
-      consent_state: "granted" | "denied";
-    }
-  | {
-      event: "amd_page_view";
-      page_path: string;
-      page_location: string;
-      page_title: string;
-    }
-  | {
-      event: "amd_click_download_puzzle" | "amd_generate_lead";
-      event_category?: DataLayerValue;
-      event_label?: DataLayerValue;
-      location?: DataLayerValue;
-    };
-
-declare global {
-  interface Window {
-    dataLayer?: AmdDataLayerEvent[];
-    __amdLastConsentState?: "granted" | "denied";
-    __amdLastPageViewUrl?: string | null;
-  }
-}
-
-function hasAnalyticsConsent() {
-  return document.cookie.includes(CONSENT_COOKIE_ACCEPTED);
-}
-
-function pushDataLayer(event: AmdDataLayerEvent) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(event);
-}
-
-function pushConsentUpdate(granted: boolean) {
-  const consentState = granted ? "granted" : "denied";
-  if (window.__amdLastConsentState === consentState) return;
-
-  window.__amdLastConsentState = consentState;
-  pushDataLayer({
-    event: "amd_consent_update",
-    consent_state: consentState,
-  });
-}
-
-function pushPageView(url: string) {
-  if (window.__amdLastPageViewUrl === url) return;
-
-  window.__amdLastPageViewUrl = url;
-  pushDataLayer({
-    event: "amd_page_view",
-    page_path: url,
-    page_location: window.location.href,
-    page_title: document.title,
-  });
-}
-
-function pushAnalyticsEvent(
-  eventName: "click_download_puzzle" | "generate_lead",
-  params: InteractionParams,
-) {
-  if (!hasAnalyticsConsent()) return;
-
-  pushDataLayer({
-    event: eventName === "generate_lead" ? "amd_generate_lead" : "amd_click_download_puzzle",
-    ...params,
-  });
-}
 
 export default function Analytics() {
   const pathname = usePathname();
@@ -125,6 +53,7 @@ export default function Analytics() {
       const target = event.target as HTMLElement | null;
       const trackedElement = target?.closest<HTMLElement>("[data-analytics-event]");
       if (!trackedElement) return;
+      if (trackedElement.dataset.analyticsManagedNavigation === "true") return;
       if (trackedElement.dataset.analyticsEvent !== "click_download_puzzle") return;
 
       pushAnalyticsEvent("click_download_puzzle", {
