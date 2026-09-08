@@ -60,59 +60,66 @@ export default function AnalyticsQaClient() {
     setAction(currentAction || "none");
 
     window.__amdQaHandledActions = window.__amdQaHandledActions || new Set<string>();
-    if (window.__amdQaHandledActions.has(key)) return;
-    window.__amdQaHandledActions.add(key);
 
-    if (!currentAction || currentAction === "pageview") {
-      setStatus("done");
-      return;
-    }
+    const timer = window.setTimeout(() => {
+      if (window.__amdQaHandledActions?.has(key)) return;
+      window.__amdQaHandledActions?.add(key);
 
-    if (currentAction === "reset") {
-      resetConsentCookie();
-      window.__amdLastConsentState = undefined;
-      window.__amdLastPageViewUrl = null;
-      setStatus("done");
-      return;
-    }
+      if (!currentAction || currentAction === "pageview") {
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "grant") {
-      dispatchConsentGranted();
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "reset") {
+        resetConsentCookie();
+        window.__amdLastConsentState = undefined;
+        window.__amdLastPageViewUrl = null;
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "deny") {
-      dispatchConsentDenied();
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "grant") {
+        dispatchConsentGranted();
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "cta") {
-      ctaRef.current?.click();
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "deny") {
+        dispatchConsentDenied();
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "lead-success") {
-      dispatchLeadSuccess();
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "cta") {
+        ctaRef.current?.click();
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "failed-submit") {
-      formRef.current?.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "lead-success") {
+        dispatchLeadSuccess();
+        setStatus("done");
+        return;
+      }
 
-    if (currentAction === "spa") {
-      router.push(`/__analytics-qa?action=pageview&scenario=spa&nonce=${Date.now()}`);
-      setStatus("done");
-      return;
-    }
+      if (currentAction === "failed-submit") {
+        formRef.current?.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+        setStatus("done");
+        return;
+      }
 
-    setStatus("unknown-action");
+      if (currentAction === "spa") {
+        router.push(`/__analytics-qa?action=pageview&scenario=spa&nonce=${Date.now()}`);
+        setStatus("done");
+        return;
+      }
+
+      setStatus("unknown-action");
+    }, 50);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
   }, [router]);
 
   return (
