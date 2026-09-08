@@ -84,7 +84,7 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
               className="ml-block-form"
               action="https://assets.mailerlite.com/jsonp/2316254/forms/186553076507739391/subscribe"
               data-code=""
-              data-analytics-submit-event="generate_lead"
+              data-analytics-success-event="generate_lead"
               data-analytics-category="lead"
               data-analytics-label={`mailer_lite_${variant}`}
               data-analytics-location={variant === "dark" ? "landing_hero_form" : "landing_bottom_form"}
@@ -190,10 +190,30 @@ export default function DarmowaZagadkaPage() {
       />
       <Script id="ml-init" strategy="lazyOnload">{`
         fetch("https://assets.mailerlite.com/jsonp/2316254/forms/186553076507739391/takel");
+        window.__amdMailerLiteLastLead = null;
+        document.addEventListener("submit", function(event) {
+          var form = event.target;
+          if (!form || !form.matches || !form.matches(".ml-block-form[data-analytics-success-event]")) return;
+
+          window.__amdMailerLiteLastLead = {
+            eventName: form.dataset.analyticsSuccessEvent,
+            event_category: form.dataset.analyticsCategory,
+            event_label: form.dataset.analyticsLabel,
+            location: form.dataset.analyticsLocation
+          };
+        }, true);
         function ml_webform_success_40808156() {
           var $ = ml_jQuery || jQuery;
           $('.ml-subscribe-form-40808156 .row-success').show();
           $('.ml-subscribe-form-40808156 .row-form').hide();
+          window.dispatchEvent(new CustomEvent("amd:lead-success", {
+            detail: window.__amdMailerLiteLastLead || {
+              eventName: "generate_lead",
+              event_category: "lead",
+              event_label: "mailer_lite",
+              location: "darmowa_zagadka"
+            }
+          }));
         }
       `}</Script>
 

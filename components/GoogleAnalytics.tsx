@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 declare global {
@@ -13,6 +13,13 @@ declare global {
 const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-V817XGHG8Q";
 const CONSENT_COOKIE = "amd_cookie_consent=true";
+
+type AnalyticsEventDetail = {
+  eventName?: string;
+  event_category?: string;
+  event_label?: string;
+  location?: string;
+};
 
 function updateConsent(granted: boolean) {
   if (!window.gtag) return;
@@ -48,16 +55,30 @@ function sendEvent(
 export default function GoogleAnalytics() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const consentGrantedRef = useRef(false);
+  const lastPageViewUrlRef = useRef<string | null>(null);
+
+  const sendTrackedPageView = () => {
+    if (!consentGrantedRef.current) return;
+
+    const url = `${window.location.pathname}${window.location.search}`;
+    if (lastPageViewUrlRef.current === url) return;
+
+    lastPageViewUrlRef.current = url;
+    sendPageView(url);
+  };
 
   useEffect(() => {
     if (!GA_MEASUREMENT_ID || typeof window === "undefined") return;
 
     const grant = () => {
+      consentGrantedRef.current = true;
       updateConsent(true);
-      sendPageView(`${window.location.pathname}${window.location.search}`);
+      sendTrackedPageView();
     };
 
     const deny = () => {
+      consentGrantedRef.current = false;
       updateConsent(false);
     };
 
@@ -73,26 +94,24 @@ export default function GoogleAnalytics() {
       });
     };
 
-    const handleSubmit = (event: Event) => {
-      const target = event.target as HTMLFormElement | null;
-      if (!target) return;
-      const eventName = target.dataset.analyticsSubmitEvent;
-      if (!eventName) return;
+    const handleLeadSuccess = (event: Event) => {
+      const detail = (event as CustomEvent<AnalyticsEventDetail>).detail || {};
 
-      sendEvent(eventName, {
-        event_category: target.dataset.analyticsCategory,
-        event_label: target.dataset.analyticsLabel,
-        location: target.dataset.analyticsLocation,
+      sendEvent(detail.eventName || "generate_lead", {
+        event_category: detail.event_category,
+        event_label: detail.event_label,
+        location: detail.location,
       });
     };
 
     window.addEventListener("amd:consent-granted", grant);
     window.addEventListener("amd:consent-denied", deny);
+    window.addEventListener("amd:lead-success", handleLeadSuccess);
     document.addEventListener("click", handleClick);
-    document.addEventListener("submit", handleSubmit);
 
     if (document.cookie.includes(CONSENT_COOKIE)) {
-      grant();
+      consentGrantedRef.current = true;
+      updateConsent(true);
     } else {
       deny();
     }
@@ -100,8 +119,8 @@ export default function GoogleAnalytics() {
     return () => {
       window.removeEventListener("amd:consent-granted", grant);
       window.removeEventListener("amd:consent-denied", deny);
+      window.removeEventListener("amd:lead-success", handleLeadSuccess);
       document.removeEventListener("click", handleClick);
-      document.removeEventListener("submit", handleSubmit);
     };
   }, []);
 
@@ -112,6 +131,9 @@ export default function GoogleAnalytics() {
     const query = searchParams?.toString();
     const url = query ? `${pathname}?${query}` : pathname;
 
+    if (lastPageViewUrlRef.current === url) return;
+
+    lastPageViewUrlRef.current = url;
     sendPageView(url);
   }, [pathname, searchParams]);
 
