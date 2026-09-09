@@ -74,7 +74,7 @@ const faqItems = [
 function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
   const isDark = variant === "dark";
   return (
-    <div id="mlb2-40808156" className="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40808156">
+    <div id={`mlb2-40808156_${variant}`} className="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40808156">
       <div>
         <div className="ml-form-embedWrapper embedForm">
 
@@ -85,6 +85,7 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
               action="https://assets.mailerlite.com/jsonp/2316254/forms/186553076507739391/subscribe"
               data-code=""
               data-analytics-success-event="generate_lead"
+              data-analytics-form-id={isDark ? "free_puzzle_hero" : "free_puzzle_bottom"}
               data-analytics-category="lead"
               data-analytics-label={`mailer_lite_${variant}`}
               data-analytics-location={variant === "dark" ? "landing_hero_form" : "landing_bottom_form"}
@@ -190,31 +191,50 @@ export default function DarmowaZagadkaPage() {
       />
       <Script id="ml-init" strategy="lazyOnload">{`
         fetch("https://assets.mailerlite.com/jsonp/2316254/forms/186553076507739391/takel");
-        window.__amdMailerLiteLastLead = null;
+        var submittedForms = new WeakSet();
+        var completedForms = new WeakSet();
+        var configuredClients = new WeakSet();
+        var requestSequence = 0;
         document.addEventListener("submit", function(event) {
           var form = event.target;
           if (!form || !form.matches || !form.matches(".ml-block-form[data-analytics-success-event]")) return;
 
-          window.__amdMailerLiteLastLead = {
-            eventName: form.dataset.analyticsSuccessEvent,
-            event_category: form.dataset.analyticsCategory,
-            event_label: form.dataset.analyticsLabel,
-            location: form.dataset.analyticsLocation
-          };
+          var client = window.ml_jQuery;
+          if (client && !configuredClients.has(client)) {
+            // Run before jQuery's JSONP prefilter to isolate concurrent embed responses.
+            client.ajaxPrefilter("+jsonp", function(options) {
+              var url = new URL(options.url, window.location.href);
+              if (url.origin === "https://assets.mailerlite.com" &&
+                  url.pathname === "/jsonp/2316254/forms/186553076507739391/subscribe") {
+                options.jsonpCallback = "amdMlResponse_" + (++requestSequence);
+              }
+            });
+            configuredClients.add(client);
+          }
+          submittedForms.add(form);
         }, true);
-        function ml_webform_success_40808156() {
-          var $ = ml_jQuery || jQuery;
-          $('.ml-subscribe-form-40808156 .row-success').show();
-          $('.ml-subscribe-form-40808156 .row-form').hide();
-          window.dispatchEvent(new CustomEvent("amd:lead-success", {
-            detail: window.__amdMailerLiteLastLead || {
-              eventName: "generate_lead",
-              event_category: "lead",
-              event_label: "mailer_lite",
-              location: "darmowa_zagadka"
-            }
-          }));
-        }
+        // MailerLite derives this callback name from the embed container ID.
+        ["dark", "light"].forEach(function(variant) {
+          window["ml_webform_success_40808156_" + variant] = function() {
+            var container = document.getElementById("mlb2-40808156_" + variant);
+            var form = container && container.querySelector("form");
+            if (!form || !submittedForms.has(form) || completedForms.has(form)) return;
+            // Success is terminal for this embed, including repeated callbacks.
+            completedForms.add(form);
+            container.querySelector(".row-success").style.display = "block";
+            container.querySelector(".row-form").style.display = "none";
+            window.dispatchEvent(new CustomEvent("amd:lead-success", {
+              detail: {
+                eventName: "generate_lead",
+                event_category: form.dataset.analyticsCategory,
+                event_label: form.dataset.analyticsLabel,
+                location: form.dataset.analyticsLocation,
+                form_id: form.dataset.analyticsFormId,
+                lead_type: "free_puzzle"
+              }
+            }));
+          };
+        });
       `}</Script>
 
       {/* NAV */}
@@ -300,7 +320,7 @@ export default function DarmowaZagadkaPage() {
               <div className="text-6xl mb-4">📵</div>
               <p className="font-display text-2xl text-cream mb-2">100% bez ekranu</p>
               <p className="text-cream/60 text-sm mb-6">Teczka, szyfry, notatnik detektywa. Żadnego tabletu, żadnego telefonu.</p>
-              <a href="#formularz" className="bg-gold text-navy font-bold px-6 py-3 rounded-full text-sm hover:bg-orange transition-colors">
+              <a href="#formularz" data-analytics-event="click_download_puzzle" data-analytics-category="lead" data-analytics-label="landing_jump_to_form" data-analytics-location="landing_no_screen" className="bg-gold text-navy font-bold px-6 py-3 rounded-full text-sm hover:bg-orange transition-colors">
                 Pobierz darmowe śledztwo
               </a>
             </div>

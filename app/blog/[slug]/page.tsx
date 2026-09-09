@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AnalyticsLink from "@/components/AnalyticsLink";
 import { notFound } from "next/navigation";
 import { articles } from "../articles";
 import { SITE_URL } from "@/lib/seo";
@@ -59,9 +60,9 @@ export default function BlogArticlePage({ params }: Props) {
           <Link href="/" className="font-display text-cream text-base">
             <span className="text-gold">Akademia</span> Małego Detektywa
           </Link>
-          <Link href="/darmowa-zagadka" className="bg-gold text-navy text-sm font-bold px-4 py-2 rounded-full">
+          <AnalyticsLink href="/darmowa-zagadka" analyticsCategory="lead" analyticsLabel="article_header_pdf" analyticsLocation="article_header" className="bg-gold text-navy text-sm font-bold px-4 py-2 rounded-full">
             Darmowy PDF
-          </Link>
+          </AnalyticsLink>
         </div>
       </header>
 
@@ -357,9 +358,9 @@ export default function BlogArticlePage({ params }: Props) {
         <div className="mt-16 bg-navy rounded-3xl p-10 text-center">
           <p className="font-display text-2xl text-cream mb-3">Gotowy na pierwsze śledztwo?</p>
           <p className="text-cream/70 mb-6">Pobierz darmową zagadkę PDF i sprawdź, czy Twoje dziecko zostanie Detektywem FOX-a.</p>
-          <Link href="/darmowa-zagadka" className="inline-block bg-gold text-navy font-bold px-8 py-4 rounded-full text-lg hover:bg-orange transition-colors">
+          <AnalyticsLink href="/darmowa-zagadka" analyticsCategory="lead" analyticsLabel="article_bottom_pdf" analyticsLocation="article_bottom" className="inline-block bg-gold text-navy font-bold px-8 py-4 rounded-full text-lg hover:bg-orange transition-colors">
             Pobierz za darmo →
-          </Link>
+          </AnalyticsLink>
         </div>
 
         <div className="mt-10">

@@ -12,6 +12,8 @@ export type AnalyticsInteractionParams = {
   event_category?: DataLayerValue;
   event_label?: DataLayerValue;
   location?: DataLayerValue;
+  form_id?: string;
+  lead_type?: "free_puzzle";
 };
 
 type QueuedNavigationCtaEvent = AnalyticsInteractionParams & {
@@ -35,6 +37,8 @@ export type AmdDataLayerEvent =
       event_category?: DataLayerValue;
       event_label?: DataLayerValue;
       location?: DataLayerValue;
+      form_id?: string;
+      lead_type?: "free_puzzle";
     };
 
 declare global {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AnalyticsLink from "@/components/AnalyticsLink";
 import { SITE_URL } from "@/lib/seo";
 import { articles } from "./articles";
 
@@ -34,9 +35,9 @@ export default function BlogPage() {
           <Link href="/" className="font-display text-cream text-base">
             <span className="text-gold">Akademia</span> Małego Detektywa
           </Link>
-          <Link href="/darmowa-zagadka" className="bg-gold text-navy text-sm font-bold px-4 py-2 rounded-full">
+          <AnalyticsLink href="/darmowa-zagadka" analyticsCategory="lead" analyticsLabel="blog_header_pdf" analyticsLocation="blog_header" className="bg-gold text-navy text-sm font-bold px-4 py-2 rounded-full">
             Darmowy PDF
-          </Link>
+          </AnalyticsLink>
         </div>
       </header>
 
@@ -88,9 +89,9 @@ export default function BlogPage() {
         <div className="text-center mt-16 bg-navy rounded-3xl p-12">
           <h2 className="font-display text-3xl text-cream mb-4">Zacznij od darmowej zagadki</h2>
           <p className="text-cream/70 mb-6">Pobierz pierwszą sprawę PDF i sprawdź, jak działa Akademia Małego Detektywa.</p>
-          <Link href="/darmowa-zagadka" className="inline-block bg-gold text-navy font-bold px-8 py-4 rounded-full text-lg hover:bg-orange transition-colors">
+          <AnalyticsLink href="/darmowa-zagadka" analyticsCategory="lead" analyticsLabel="blog_bottom_pdf" analyticsLocation="blog_bottom" className="inline-block bg-gold text-navy font-bold px-8 py-4 rounded-full text-lg hover:bg-orange transition-colors">
             Pobierz darmową zagadkę PDF →
-          </Link>
+          </AnalyticsLink>
         </div>
       </main>
 

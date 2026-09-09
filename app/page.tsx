@@ -453,12 +453,15 @@ export default function HomePage() {
                 </Link>
               </li>
               <li>
-                <Link
+                <AnalyticsLink
                   href="/darmowa-zagadka"
                   className="transition-colors hover:text-gold"
+                  analyticsCategory="lead"
+                  analyticsLabel="home_footer_pdf"
+                  analyticsLocation="home_footer"
                 >
                   Darmowy PDF
-                </Link>
+                </AnalyticsLink>
               </li>
               <li>
                 <Link href="/blog" className="transition-colors hover:text-gold">

@@ -16,6 +16,8 @@ type AnalyticsEventDetail = {
   event_category?: string;
   event_label?: string;
   location?: string;
+  form_id?: string;
+  lead_type?: "free_puzzle";
 };
 
 export default function Analytics() {
@@ -71,6 +73,8 @@ export default function Analytics() {
         event_category: detail.event_category || "lead",
         event_label: detail.event_label,
         location: detail.location,
+        form_id: detail.form_id,
+        lead_type: detail.lead_type,
       });
     };
 
