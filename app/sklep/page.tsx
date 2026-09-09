@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import AnalyticsLink from "@/components/AnalyticsLink";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { DEFAULT_META, SITE_URL } from "@/lib/seo";
@@ -61,9 +62,9 @@ export default function ShopPage() {
               </p>
 
               <div className="mt-8 flex justify-center">
-                <a href="/#darmowy-pdf" className="btn">
+                <AnalyticsLink href="/#darmowy-pdf" analyticsCategory="lead" analyticsLabel="shop_free_pdf" analyticsLocation="shop_coming_soon" className="btn">
                   Odbierz darmową sprawę
-                </a>
+                </AnalyticsLink>
               </div>
             </div>
 
