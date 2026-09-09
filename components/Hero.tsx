@@ -3,7 +3,7 @@ export default function Hero() {
     <section id="home" className="hero-full relative overflow-hidden text-white">
       <img
         src="/detektyw.png"
-        alt="FOX i teczka sledcza"
+        alt="Ilustracja detektywistycznej przygody z teczką śledczą"
         className="absolute inset-0 h-full w-full object-cover object-[66%_top] sm:object-[68%_center] lg:object-center"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,18,31,0.36)_0%,rgba(4,18,31,0.08)_24%,rgba(4,18,31,0.22)_52%,rgba(4,18,31,0.84)_100%)] sm:bg-[linear-gradient(90deg,rgba(4,18,31,0.72)_0%,rgba(4,18,31,0.52)_28%,rgba(4,18,31,0.14)_50%,rgba(4,18,31,0)_68%)]" />
@@ -41,7 +41,7 @@ export default function Hero() {
             <div>
               <p className="text-sm font-black uppercase text-gold">Pobierz darmową zagadkę!</p>
               <p className="mt-2 text-[0.8rem] leading-5 text-white/75">
-                Odbierz bezpłatną teczkę PDF i sprawdź, czy Twoje dziecko pokocha śledztwa z FOX-em.
+                Poznajcie świat Detektywa IWO. Odbierz bezpłatną teczkę PDF, w której dziecko łączy tropy i odkrywa rozwiązanie.
               </p>
             </div>
           </div>

@@ -2,12 +2,19 @@ export const SITE_URL = "https://malydetektyw.pl";
 export const SITE_NAME = "Akademia Małego Detektywa";
 
 export const DEFAULT_META = {
-  title: "Zagadki detektywistyczne dla dzieci 8-12 lat | FOX",
+  title: "Zagadki detektywistyczne dla dzieci 8-12 lat | Detektyw IWO",
   description:
-    "Papierowe zagadki detektywistyczne dla dzieci 8–12 lat. Teczki ze śledztwem, szyfry i tropy. Pobierz darmową sprawę PDF i sprawdź, czy Twoje dziecko pokocha misje z FOX-em!",
-  ogImage: `${SITE_URL}/og-image.png`,
+    "Papierowe zagadki detektywistyczne dla dzieci 8–12 lat. Detektyw IWO towarzyszy dziecku, które analizuje tropy i odkrywa rozwiązanie. Przygoda bez ekranu i czas razem.",
+  ogImage: `${SITE_URL}/iwo-social.webp`,
   keywords:
     "zagadki detektywistyczne dla dzieci, gry detektywistyczne PDF, teczka detektywa, zagadki dla dzieci 8-12 lat, zabawa bez ekranu, śledztwa dla dzieci",
+};
+
+export const SOCIAL_IMAGE = {
+  url: DEFAULT_META.ogImage,
+  width: 630,
+  height: 630,
+  alt: "Akademia Małego Detektywa – Detektyw IWO",
 };
 
 export const schemaOrganization = {
@@ -15,7 +22,7 @@ export const schemaOrganization = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
+  logo: `${SITE_URL}/iwo-logo.png`,
   sameAs: [],
   contactPoint: {
     "@type": "ContactPoint",
@@ -30,14 +37,6 @@ export const schemaWebSite = {
   name: SITE_NAME,
   url: SITE_URL,
   inLanguage: "pl-PL",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export const schemaFAQHome = {
@@ -62,18 +61,18 @@ export const schemaFAQHome = {
     },
     {
       "@type": "Question",
-      name: "Co znajduje się w pierwszym wydaniu premium?",
+      name: "Czy wydanie premium jest już dostępne?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Wydanie premium zawiera: teczkę z zagadką, latarkę UV, notatnik detektywa oraz akcesoria śledcze. To najbardziej rozbudowany zestaw w całej serii.",
+        text: "Jeszcze nie. Pracujemy nad fizycznymi teczkami ze śledztwem i akcesoriami. Szczegóły zawartości podamy przed premierą. Teraz możecie rozpocząć przygodę od bezpłatnej zagadki PDF do druku.",
       },
     },
     {
       "@type": "Question",
-      name: "Czy kolejne sprawy będą tańsze?",
+      name: "Ile będą kosztować kolejne sprawy?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Pierwsze wydanie premium to nasz flagowy produkt z pełnym zestawem gadżetów. Kolejne sprawy będą dostępne w różnych wariantach cenowych — od tańszych zestawów po kolejne edycje premium.",
+        text: "Ceny kolejnych spraw nie zostały jeszcze ogłoszone. Sklep jest w przygotowaniu i nie przyjmujemy zamówień. Pierwsza zagadka PDF jest bezpłatna po zapisie e-mail.",
       },
     },
     {
@@ -89,7 +88,7 @@ export const schemaFAQHome = {
       name: "Czy trzeba drukować zagadki z Akademii Małego Detektywa?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Zagadki w wersji PDF wymagają wydruku — to część zabawy. Wydanie premium jest gotowe do zabawy od razu po rozpakowaniu, bez drukarki.",
+        text: "Dostępna teraz darmowa zagadka PDF wymaga samodzielnego wydruku. Fizyczne zestawy, które nie będą wymagały drukarki, są dopiero w przygotowaniu.",
       },
     },
     {

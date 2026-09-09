@@ -1,7 +1,7 @@
 export const articles = [
   {
     slug: "zagadki-logiczne-dla-dzieci-8-lat",
-    title: "Zagadki logiczne dla dzieci 8 lat — 10 łatwych przykładów z rozwiązaniami",
+    title: "Zagadki logiczne dla dzieci 8 lat — 5 łatwych przykładów z rozwiązaniami",
     desc: "Gotowe zagadki logiczne dla ośmiolatków z rozwiązaniami. Idealne na pierwsze ćwiczenia myślenia dedukcyjnego.",
     category: "Zagadki",
     date: "2026-04-10",
@@ -9,7 +9,7 @@ export const articles = [
   },
   {
     slug: "zabawa-bez-ekranu-dla-dzieci",
-    title: "Zabawa bez ekranu dla dzieci — 15 pomysłów na weekend",
+    title: "Zabawa bez ekranu dla dzieci — 8 pomysłów na weekend",
     desc: "Sprawdzone sposoby na oderwanie dziecka od tabletu. Aktywna, kreatywna zabawa w domu i na podwórku.",
     category: "Inspiracje",
     date: "2026-04-15",

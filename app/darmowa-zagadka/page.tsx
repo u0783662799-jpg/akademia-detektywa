@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ArrowRight, Plus } from "lucide-react";
 import { SITE_URL } from "@/lib/seo";
+
+export { metadata } from "./metadata";
 
 const schemaLandingFAQ = {
   "@context": "https://schema.org",
@@ -45,23 +50,6 @@ const schemaProduct = {
   offers: { "@type": "Offer", price: "0", priceCurrency: "PLN", availability: "https://schema.org/InStock", url: `${SITE_URL}/darmowa-zagadka` },
 };
 
-const benefits = [
-  { icon: "🔍", title: "Kompletna sprawa", desc: "Opis sytuacji, tropy, podejrzani i zadanie finałowe." },
-  { icon: "🧩", title: "Logika i myślenie", desc: "Dziecko ćwiczy dedukcję i koncentrację." },
-  { icon: "📵", title: "Zero ekranu", desc: "Papierowa zabawa – bez tabletu ani telefonu." },
-  { icon: "⏱️", title: "45–90 minut", desc: "Wystarczy na jedno popołudnie w domu." },
-  { icon: "🖨️", title: "Drukujesz i grasz", desc: "PDF gotowy do wydruku od razu po pobraniu." },
-  { icon: "🎁", title: "Bez zobowiązań", desc: "Żadnej subskrypcji. Plik jest Twój na zawsze." },
-];
-
-const noScreenBenefits = [
-  "Brak niebieskiego światła wieczorem",
-  "Dziecko ćwiczy koncentrację i cierpliwość",
-  "Naturalna przerwa od mediów społecznościowych",
-  "Rodzic i dziecko grają razem – prawdziwy czas razem",
-  "Śledztwo buduje poczucie sprawczości i sukcesu",
-];
-
 const faqItems = [
   { q: "Czy zagadka PDF jest naprawdę darmowa?", a: "Tak, 100% bezpłatna. Wystarczy adres e-mail – plik wysyłamy natychmiast." },
   { q: "Co zawiera darmowa zagadka?", a: "Kompletna mini teczka: opis sprawy, tropy, lista podejrzanych, mapa miejsca zdarzenia i zadanie finałowe." },
@@ -74,7 +62,7 @@ const faqItems = [
 function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
   const isDark = variant === "dark";
   return (
-    <div id={`mlb2-40808156_${variant}`} className="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40808156">
+    <div id={`mlb2-40808156_${variant}`} className="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40808156 puzzle-form">
       <div>
         <div className="ml-form-embedWrapper embedForm">
 
@@ -96,7 +84,9 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
               <div className="ml-form-formContent">
                 <div className="ml-form-fieldRow ml-last-item">
                   <div className="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <label className="email-label" htmlFor={`puzzle-email-${variant}`}>Twój adres e-mail</label>
                     <input
+                      id={`puzzle-email-${variant}`}
                       aria-label="email"
                       aria-required="true"
                       type="email"
@@ -237,132 +227,31 @@ export default function DarmowaZagadkaPage() {
         });
       `}</Script>
 
-      {/* NAV */}
-      <header className="bg-navy">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Logo Akademii Małego Detektywa" width={32} height={32} />
-            <span className="font-display text-cream text-base">
-              <span className="text-gold">Akademia</span> Małego Detektywa
-            </span>
-          </Link>
-          <Link href="/sklep" className="text-cream/70 text-sm hover:text-gold transition-colors">Sklep →</Link>
-        </div>
-      </header>
-
-      <main>
-        {/* HERO */}
-        <section className="bg-navy text-cream py-16 md:py-24 px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">🎁 Bezpłatna teczka śledcza PDF</p>
-              <h1 className="font-display text-4xl md:text-5xl text-cream leading-tight mb-4">
-                Pobierz darmową zagadkę detektywistyczną PDF dla dzieci
-              </h1>
-              <p className="text-cream/75 text-lg mb-8 leading-relaxed">
-                Pierwsza sprawa z Akademii Małego Detektywa — zupełnie bezpłatna. Wydrukuj, daj dziecku i obserwuj, jak zamienia się w detektywa FOX-a.
-              </p>
+      <Header />
+      <main id="main-content" className="free-page">
+        <section className="free-hero">
+          <div className="wrap">
+            <div className="free-hero-copy"><p className="section-label">Sprawa Zaginionego Klejnotu · 8–10 lat</p><h1>Darmowa<br /><em>zagadka PDF.</em></h1><p className="lead-copy">Pierwszy trop do Waszej wspólnej przygody.</p><p>Odbierz materiały, wydrukuj je i rozpocznijcie śledztwo. Mapa zamku, podejrzani i wskazówki już na Was czekają.</p>
               <MailerLiteForm variant="dark" />
+              <p className="form-footnote">Do wydruku w domu · Zabawa bez ekranu · 45–90 minut</p>
             </div>
-            <div className="flex justify-center">
-              <Image
-                src="/pdf-cover.png"
-                alt="Okładka darmowej zagadki detektywistycznej PDF – Sprawa Zaginionego Klejnotu dla dzieci 8-10 lat"
-                width={340}
-                height={440}
-                priority
-                className="rounded-3xl shadow-soft"
-              />
-            </div>
+            <figure className="free-hero-art"><Image src="/pdf-cover.png" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={1055} height={1492} priority sizes="(max-width: 700px) 250px, 380px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
           </div>
         </section>
-
-        {/* BENEFITS */}
-        <section className="bg-paper py-16 px-4" aria-label="Co zawiera darmowa zagadka PDF">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-display text-3xl md:text-4xl text-navy">Co dostajesz za darmo?</h2>
-              <p className="text-navy/60 mt-2">Kompletna sprawa, nie tylko próbka.</p>
-            </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {benefits.map((b) => (
-                <div key={b.title} className="bg-cream rounded-2xl p-6 border border-navy/10 hover:border-gold/40 transition-colors">
-                  <div className="text-3xl mb-3">{b.icon}</div>
-                  <h3 className="font-display text-lg text-navy mb-1">{b.title}</h3>
-                  <p className="text-navy/60 text-sm">{b.desc}</p>
-                </div>
-              ))}
-            </div>
+        <section className="wrap section-space free-materials" aria-label="Co zawiera darmowa zagadka PDF">
+          <div className="section-intro"><p className="section-label">Zajrzyj do środka</p><h2>Nie pusta kartka.<br /><em>Cała tajemnica.</em></h2><p>Opis sprawy, mapa, podejrzani i tropy. Dziecko obserwuje, porównuje wskazówki i zapisuje własne wnioski.</p></div>
+          <div className="actual-pages">
+            <figure><Image src="/puzzle-map.webp" alt="Mapa zamku z darmowego PDF: galeria, biblioteka, ogród i ślady" width={708} height={1000} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Mapa zamku</span>Gdzie szukać kolejnej wskazówki?</figcaption></figure>
+            <figure><Image src="/puzzle-suspects.webp" alt="Lista podejrzanych i miejsce na wnioski dziecka, strona darmowego PDF" width={708} height={1000} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Fakty i poszlaki</span>Nie wszystko jest takie, jak się wydaje.</figcaption></figure>
           </div>
         </section>
-
-        {/* NO SCREEN */}
-        <section className="bg-navy py-16 px-4" aria-label="Zabawa bez ekranu dla dzieci">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">📵 Bez ekranu</p>
-              <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">
-                Detektywistyczna zabawa bez tabletu i telefonu
-              </h2>
-              <p className="text-cream/70 mb-6 leading-relaxed">
-                Każda teczka to papierowa przygoda — szyfry, tropy i zagadki, które wymagają myślenia, nie klikania.
-              </p>
-              <ul className="space-y-3">
-                {noScreenBenefits.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-cream/80 text-sm">
-                    <span className="text-gold mt-0.5 flex-shrink-0">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-ink rounded-3xl p-8 border border-white/10 text-center">
-              <div className="text-6xl mb-4">📵</div>
-              <p className="font-display text-2xl text-cream mb-2">100% bez ekranu</p>
-              <p className="text-cream/60 text-sm mb-6">Teczka, szyfry, notatnik detektywa. Żadnego tabletu, żadnego telefonu.</p>
-              <a href="#formularz" data-analytics-event="click_download_puzzle" data-analytics-category="lead" data-analytics-label="landing_jump_to_form" data-analytics-location="landing_no_screen" className="bg-gold text-navy font-bold px-6 py-3 rounded-full text-sm hover:bg-orange transition-colors">
-                Pobierz darmowe śledztwo
-              </a>
-            </div>
-          </div>
+        <section className="together-band"><div className="wrap"><p className="section-label">Na podłodze, przy stole, razem</p><h2>Odłóżcie ekrany.<br /><em>Rozłóżcie wskazówki.</em></h2><p>Wydrukowane materiały, ołówek i ciekawość wystarczą na początek. Możesz czytać wspólnie z dzieckiem albo dać mu przestrzeń na własne pomysły.</p><a href="#formularz" data-analytics-event="click_download_puzzle" data-analytics-category="lead" data-analytics-label="landing_jump_to_form" data-analytics-location="landing_no_screen" className="text-link">Pobierz darmowe śledztwo <ArrowRight size={19} aria-hidden="true" /></a></div></section>
+        <section className="wrap section-space bottom-form-section" id="formularz" aria-label="Pobierz darmową zagadkę PDF – formularz">
+          <div><p className="section-label">Gotowi na pierwszy trop?</p><h2>Przygoda zaczyna się<br /><em>w Waszej skrzynce.</em></h2><p>Podaj e-mail, aby otrzymać darmową zagadkę i wiadomości z Akademii.</p></div><div><MailerLiteForm variant="light" /></div>
         </section>
-
-        {/* SECOND CTA FORM */}
-        <section className="bg-cream py-16 px-4" id="formularz" aria-label="Pobierz darmową zagadkę PDF – formularz">
-          <div className="max-w-xl mx-auto text-center">
-            <p className="text-orange text-xs font-bold uppercase tracking-widest mb-3">Ostatni krok</p>
-            <h2 className="font-display text-3xl md:text-4xl text-navy mb-4">Wyślij mi darmową zagadkę PDF</h2>
-            <p className="text-navy/60 mb-8">Podaj e-mail, a teczka detektywa trafi do Ciebie w ciągu minuty.</p>
-            <MailerLiteForm variant="light" />
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="bg-paper py-16 px-4" aria-label="FAQ – darmowa zagadka detektywistyczna PDF">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-display text-3xl text-navy text-center mb-10">Masz pytania?</h2>
-            <div className="space-y-4">
-              {faqItems.map((item, i) => (
-                <details key={i} className="bg-cream rounded-2xl p-6 border border-navy/10 group">
-                  <summary className="font-semibold text-navy cursor-pointer list-none flex justify-between items-center">
-                    {item.q}
-                    <span className="text-gold group-open:rotate-45 transition-transform text-xl">+</span>
-                  </summary>
-                  <p className="mt-4 text-navy/70 leading-relaxed">{item.a}</p>
-                </details>
-              ))}
-            </div>
-            <div className="text-center mt-10">
-              <p className="text-navy/50 text-sm mb-4">Jeszcze pytania?</p>
-              <Link href="/kontakt" className="text-orange font-semibold hover:underline">Napisz do nas →</Link>
-            </div>
-          </div>
-        </section>
+        <section className="wrap faq-section section-space" aria-label="FAQ – darmowa zagadka detektywistyczna PDF"><div><p className="section-label">Dobrze wiedzieć</p><h2>Masz pytania?</h2><a href="mailto:pomoc@malydetektyw.pl" className="text-link">Napisz do nas <ArrowRight size={18} aria-hidden="true" /></a></div><div className="faq-list">{faqItems.map(item=><details key={item.q}><summary>{item.q}<Plus size={20} aria-hidden="true" /></summary><p>{item.a}</p></details>)}</div></section>
       </main>
-
-      <footer className="bg-ink text-cream/50 py-8 px-4 text-sm text-center">
-        <p>© 2026 Akademia Małego Detektywa. <Link href="/polityka-prywatnosci" className="underline hover:text-cream/70">Polityka prywatności</Link></p>
-      </footer>
+      <Footer />
     </>
   );
 }

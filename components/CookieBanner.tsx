@@ -43,9 +43,10 @@ export default function CookieBanner() {
         window.dispatchEvent(new Event("amd:consent-denied"));
       }}
     >
-      Ta strona wykorzystuje pliki cookies do poprawnego działania,
-      analizy ruchu oraz działań marketingowych. Korzystając ze strony,
-      akceptujesz używanie cookies.{" "}
+      Używamy niezbędnych plików cookies. Za Twoją zgodą zapisujemy również
+      cookies analityczne Google Analytics, które pomagają nam ulepszać stronę.
+      Możesz zaakceptować lub odrzucić cookies analityczne.
+      Twój wybór zapamiętamy na 180 dni.{" "}
 
       <Link
         href="/polityka-prywatnosci"
