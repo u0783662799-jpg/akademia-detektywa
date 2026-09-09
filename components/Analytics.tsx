@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
+  clearQueuedNavigationCtaEvent,
   GTM_ID,
   flushQueuedNavigationCtaEvent,
   hasAnalyticsConsent,
@@ -10,6 +11,7 @@ import {
   pushConsentUpdate,
   pushPageView,
 } from "@/lib/analytics";
+import { removeAnalyticsCookies } from "@/lib/analytics-cookies";
 
 type AnalyticsEventDetail = {
   eventName?: string;
@@ -50,6 +52,8 @@ export default function Analytics() {
       lastPageViewUrlRef.current = null;
       window.__amdLastPageViewUrl = null;
       pushConsentUpdate(false);
+      clearQueuedNavigationCtaEvent();
+      removeAnalyticsCookies();
     };
 
     const handleClick = (event: Event) => {
@@ -86,6 +90,9 @@ export default function Analytics() {
     if (hasAnalyticsConsent()) {
       consentGrantedRef.current = true;
       pushConsentUpdate(true);
+    } else {
+      clearQueuedNavigationCtaEvent();
+      if (document.cookie.split(";").some(cookie => cookie.trim() === "amd_cookie_consent=false")) deny();
     }
 
     return () => {

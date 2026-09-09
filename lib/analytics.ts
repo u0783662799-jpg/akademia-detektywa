@@ -52,7 +52,7 @@ declare global {
 export function hasAnalyticsConsent() {
   if (typeof document === "undefined") return false;
 
-  return document.cookie.includes(CONSENT_COOKIE_ACCEPTED);
+  return document.cookie.split(";").some(cookie => cookie.trim() === CONSENT_COOKIE_ACCEPTED);
 }
 
 export function pushDataLayer(event: AmdDataLayerEvent) {
@@ -141,4 +141,8 @@ export function flushQueuedNavigationCtaEvent() {
     event_label: queuedEvent.event_label,
     location: queuedEvent.location,
   });
+}
+
+export function clearQueuedNavigationCtaEvent() {
+  try { window.sessionStorage.removeItem(NAVIGATION_CTA_STORAGE_KEY); } catch { /* Storage may be disabled. */ }
 }

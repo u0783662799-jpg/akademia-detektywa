@@ -118,7 +118,7 @@ async function main() {
     }
     const n = await session();
     await n.page.goto(base + '/blog');
-    await n.page.locator('header a[href="/"]').click();
+    await n.page.locator('header a.brand[href="/"]').click();
     await n.page.waitForURL(base + '/');
     assert.equal((await events(n.page, 'amd_click_download_puzzle')).length, 0);
     console.log('PASS unrelated navigation: zero CTA events');
