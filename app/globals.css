@@ -276,6 +276,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 18px; }
   .shop-first-case { grid-template-columns: 1fr; gap: 40px; }.shop-first-case figure { max-width: 330px; margin: auto; padding-inline: 22px; }.case-facts div { font-size: 13px; }
 }
 @media(prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation: none!important; transition: none!important; } }
+.cookie-settings-button { color: inherit; font: inherit; cursor: pointer; min-height: 44px; text-decoration: underline; text-underline-offset: 3px; }
+.cookie-settings-close { float: right; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; margin-left: 12px; border: 1px solid currentColor; border-radius: 4px; }
+.cookie-settings-button:focus-visible, .cookie-settings-close:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
 @layer components {
   .container {

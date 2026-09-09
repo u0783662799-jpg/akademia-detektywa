@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import AnalyticsLink from "./AnalyticsLink";
+import CookieSettingsButton from "./CookieSettingsButton";
 
 export default function Footer({ home = false }: { home?: boolean }) {
   return (
@@ -16,7 +17,7 @@ export default function Footer({ home = false }: { home?: boolean }) {
         </nav>
         <p className="footer-note">Papierowe śledztwa dla dzieci<br />i wspólny czas dla całej rodziny.</p>
       </div>
-      <div className="wrap footer-bottom"><p>© 2026 Akademia Małego Detektywa</p><Link href="/polityka-prywatnosci">Polityka prywatności</Link></div>
+      <div className="wrap footer-bottom"><p>© 2026 Akademia Małego Detektywa</p><Link href="/polityka-prywatnosci">Polityka prywatności</Link><CookieSettingsButton /></div>
     </footer>
   );
 }
