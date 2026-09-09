@@ -7,12 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: "#061928",
-        ink: "#132233",
-        cream: "#fff4df",
-        paper: "#f7ead1",
-        gold: "#f7b72d",
-        orange: "#e87922",
+        navy: "#263d36",
+        ink: "#20382f",
+        cream: "#fafbf8",
+        paper: "#f0f2e9",
+        gold: "#e9bd59",
+        orange: "#a93d32",
       },
       fontFamily: {
         display: ["var(--font-display)", "Impact", "sans-serif"],

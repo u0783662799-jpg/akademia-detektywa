@@ -9,7 +9,7 @@ const messengerLink = "https://m.me/61588919505427";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Skontaktuj się z Akademią Małego Detektywa. Pomożemy dobrać odpowiednią sprawę, poziom trudności i odpowiemy na pytania o zestawy FOX-a.",
+    "Skontaktuj się z Akademią Małego Detektywa. Pomożemy dobrać odpowiednią sprawę, poziom trudności i odpowiemy na pytania o przygody Detektywa IWO.",
   alternates: {
     canonical: `${SITE_URL}/kontakt`,
   },
@@ -41,7 +41,7 @@ export default function ContactPage() {
     <>
       <Header active="contact" />
 
-      <main>
+      <main id="main-content" className="contact-page">
         <section className="section bg-cream">
           <div className="container max-w-5xl">
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">

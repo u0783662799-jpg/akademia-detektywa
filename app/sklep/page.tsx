@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import AnalyticsLink from "@/components/AnalyticsLink";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { DEFAULT_META, SITE_URL } from "@/lib/seo";
+import { DEFAULT_META, SITE_URL, SOCIAL_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Sklep",
@@ -15,19 +16,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sklep | Akademia Małego Detektywa",
     description:
-      "Pierwsze teczki detektywistyczne dla dzieci już wkrótce. Zobacz serię FOX-a i odbierz darmową sprawę PDF.",
+      "Pierwsze teczki detektywistyczne dla dzieci już wkrótce. Poznaj świat Detektywa IWO i odbierz darmową sprawę PDF.",
     url: `${SITE_URL}/sklep`,
-    images: [
-      {
-        url: DEFAULT_META.ogImage,
-        width: 1200,
-        height: 630,
-        alt: "Sklep Akademii Małego Detektywa",
-      },
-    ],
+    images: [SOCIAL_IMAGE],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Sklep | Akademia Małego Detektywa",
     description:
       "Teczki ze śledztwem, zestawy premium i darmowa sprawa PDF dla dzieci 8-12 lat.",
@@ -39,51 +33,14 @@ export default function ShopPage() {
   return (
     <>
       <Header active="shop" />
-
-      <main>
-        <section className="section bg-cream">
-          <div className="container max-w-5xl">
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="eyebrow">Sklep Akademii</p>
-
-              <h1 className="title mt-4">
-                Pierwsze sprawy w wersji teczek już wkrótce
-              </h1>
-
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-navy/75 md:text-lg">
-                Pracujemy nad fizycznymi teczkami detektywa pełnymi zagadek,
-                tropów i akcesoriów, które zamieniają pokój dziecka w prawdziwe
-                biuro śledcze.
-              </p>
-
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-navy/70">
-                Zanim sklep ruszy pełną parą, możesz pobrać darmową sprawę PDF i
-                zobaczyć, czy ten świat jest dla Twojego małego detektywa.
-              </p>
-
-              <div className="mt-8 flex justify-center">
-                <AnalyticsLink href="/#darmowy-pdf" analyticsCategory="lead" analyticsLabel="shop_free_pdf" analyticsLocation="shop_coming_soon" className="btn">
-                  Odbierz darmową sprawę
-                </AnalyticsLink>
-              </div>
-            </div>
-
-            <div className="mt-14 flex justify-center">
-              <div className="w-full max-w-4xl rounded-[2rem] bg-paper/70 p-4 shadow-soft sm:p-6">
-                <Image
-                  src="/amd.png"
-                  alt="Akademia Małego Detektywa - zapowiedź sklepu z teczkami detektywistycznymi"
-                  width={1400}
-                  height={1000}
-                  priority
-                  className="mx-auto h-auto w-full rounded-[1.5rem] object-contain"
-                />
-              </div>
-            </div>
-          </div>
+      <main id="main-content">
+        <header className="wrap editorial-heading"><p className="section-label">Sklep Akademii · w przygotowaniu</p><h1>Nowe sprawy.<br /><em>Już wkrótce.</em></h1><p>Pracujemy nad fizycznymi teczkami detektywa. Jeszcze nie przyjmujemy zamówień. Tymczasem możecie rozpocząć pierwsze śledztwo za darmo.</p></header>
+        <section className="shop-first-case wrap section-space">
+          <figure><Image src="/pdf-cover.png" alt="Dostępna teraz darmowa zagadka PDF: Sprawa Zaginionego Klejnotu" width={1055} height={1492} priority sizes="(max-width:700px) 260px, 330px" /><figcaption>Dostępna teraz · do samodzielnego wydruku</figcaption></figure>
+          <div><p className="section-label">Nie trzeba czekać na przygodę</p><h2>Sprawa Zaginionego<br /><em>Klejnotu.</em></h2><p>Papierowa tajemnica dla dzieci 8–10 lat. W środku mapa, tropy i podejrzani. Wszystko do wydrukowania w domu.</p><dl className="case-facts"><div><dt>Format</dt><dd>PDF do druku</dd></div><div><dt>Czas zabawy</dt><dd>45–90 minut</dd></div><div><dt>Na początek</dt><dd>Bezpłatnie po zapisie e-mail</dd></div></dl><AnalyticsLink href="/#darmowy-pdf" analyticsCategory="lead" analyticsLabel="shop_free_pdf" analyticsLocation="shop_coming_soon" className="action">Odbierz darmową sprawę <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink></div>
         </section>
+        <section className="coming-band"><div className="wrap coming-inner"><div><p className="section-label">W przygotowaniu</p><h2>Od pliku PDF<br /><em>do własnej teczki.</em></h2></div><p>Planujemy fizyczne zestawy pełne zagadek, tropów i akcesoriów śledczych. Szczegóły pokażemy, gdy będą gotowe. Nie musisz teraz nic zamawiać.</p></div></section>
       </main>
-
       <Footer />
     </>
   );
