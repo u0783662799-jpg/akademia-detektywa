@@ -43,6 +43,21 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/blog/zagadki-logiczne-dla-dzieci-8-lat",
+        destination: "/blog/jak-rozwijac-logiczne-myslenie-u-dziecka",
+        permanent: true,
+      },
+      {
+        source: "/blog/zabawa-bez-ekranu-dla-dzieci",
+        destination: "/blog/zabawy-rozwijajace-dla-dzieci",
+        permanent: true,
+      },
+      {
+        source: "/blog/jak-oderwac-dziecko-od-tabletu",
+        destination: "/blog/zabawy-rozwijajace-dla-dzieci",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [
           {
