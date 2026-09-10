@@ -25,12 +25,12 @@ const schemaLandingFAQ = {
     {
       "@type": "Question",
       name: "Dla jakiego wieku jest darmowa zagadka?",
-      acceptedAnswer: { "@type": "Answer", text: "Darmowa sprawa startowa jest przeznaczona dla dzieci 8–10 lat. To poziom łatwy–średni, idealny na pierwszy kontakt z Akademią Małego Detektywa." },
+      acceptedAnswer: { "@type": "Answer", text: "Darmowa sprawa startowa jest przeznaczona dla dzieci 8-10 lat. To poziom łatwy-średni, idealny na pierwszy kontakt z Akademią Małego Detektywa." },
     },
     {
       "@type": "Question",
       name: "Czy muszę drukować PDF?",
-      acceptedAnswer: { "@type": "Answer", text: "Tak, zagadka jest przeznaczona do druku. To celowy zabieg – papierowe teczki to 100% zabawy bez ekranu." },
+      acceptedAnswer: { "@type": "Answer", text: "Tak, zagadka jest przeznaczona do druku. To celowy zabieg - papierowe teczki to 100% zabawy bez ekranu." },
     },
     {
       "@type": "Question",
@@ -43,22 +43,22 @@ const schemaLandingFAQ = {
 const schemaProduct = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: "Darmowa zagadka detektywistyczna PDF – Sprawa Zaginionego Klejnotu",
-  description: "Bezpłatna teczka śledcza PDF dla dzieci 8–10 lat. Zawiera sprawę, tropy, podejrzanych i zadanie finałowe.",
+  name: "Darmowa zagadka detektywistyczna PDF - Sprawa Zaginionego Klejnotu",
+  description: "Bezpłatna teczka śledcza PDF dla dzieci 8-10 lat. Zawiera sprawę, tropy, podejrzanych i zadanie finałowe.",
   image: `${SITE_URL}/pdf-cover.png`,
   brand: { "@type": "Brand", name: "Akademia Małego Detektywa" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "PLN", availability: "https://schema.org/InStock", url: `${SITE_URL}/darmowa-zagadka` },
 };
 
 const faqItems = [
-  { q: "Czy zagadka PDF jest naprawdę darmowa?", a: "Tak, 100% bezpłatna. Wystarczy adres e-mail – plik wysyłamy natychmiast." },
+  { q: "Czy zagadka PDF jest naprawdę darmowa?", a: "Tak, 100% bezpłatna. Wystarczy adres e-mail - plik wysyłamy natychmiast." },
   { q: "Co zawiera darmowa zagadka?", a: "Kompletna mini teczka: opis sprawy, tropy, lista podejrzanych, mapa miejsca zdarzenia i zadanie finałowe." },
-  { q: "Dla jakiego wieku?", a: "Poziom łatwy–średni, idealny dla dzieci 8–10 lat na pierwszy kontakt z Akademią." },
-  { q: "Czy muszę drukować?", a: "Tak. To celowy zabieg – papierowa zabawa = zero ekranu." },
+  { q: "Dla jakiego wieku?", a: "Poziom łatwy-średni, idealny dla dzieci 8-10 lat na pierwszy kontakt z Akademią." },
+  { q: "Czy muszę drukować?", a: "Tak. To celowy zabieg - papierowa zabawa = zero ekranu." },
   { q: "Ile trwa zabawa?", a: "Od 45 do 90 minut, zależy od wieku i tempa dziecka." },
 ];
 
-/* Reusable MailerLite form — styled to match the project */
+/* Reusable MailerLite form - styled to match the project */
 function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
   const isDark = variant === "dark";
   return (
@@ -174,7 +174,7 @@ export default function DarmowaZagadkaPage() {
       <Script id="schema-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaLandingFAQ) }} />
       <Script id="schema-product" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaProduct) }} />
 
-      {/* MailerLite — loaded lazily, won't block LCP */}
+      {/* MailerLite - loaded lazily, won't block LCP */}
       <Script
         src="https://groot.mailerlite.com/js/w/webforms.min.js?vb397d78ebaa8a0f631d35384c46d781b"
         strategy="lazyOnload"
@@ -231,9 +231,9 @@ export default function DarmowaZagadkaPage() {
       <main id="main-content" className="free-page">
         <section className="free-hero">
           <div className="wrap">
-            <div className="free-hero-copy"><p className="section-label">Sprawa Zaginionego Klejnotu · 8–10 lat</p><h1>Darmowa<br /><em>zagadka PDF.</em></h1><p className="lead-copy">Pierwszy trop do Waszej wspólnej przygody.</p><p>Odbierz materiały, wydrukuj je i rozpocznijcie śledztwo. Mapa zamku, podejrzani i wskazówki już na Was czekają.</p>
+            <div className="free-hero-copy"><p className="section-label">Sprawa Zaginionego Klejnotu · 8-10 lat</p><h1>Darmowa<br /><em>zagadka PDF.</em></h1><p className="lead-copy">Pierwszy trop do Waszej wspólnej przygody.</p><p>Odbierz materiały, wydrukuj je i rozpocznijcie śledztwo. Mapa zamku, podejrzani i wskazówki już na Was czekają.</p>
               <MailerLiteForm variant="dark" />
-              <p className="form-footnote">Do wydruku w domu · Zabawa bez ekranu · 45–90 minut</p>
+              <p className="form-footnote">Do wydruku w domu · Zabawa bez ekranu · 45-90 minut</p>
             </div>
             <figure className="free-hero-art"><Image src="/pdf-cover.png" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={1055} height={1492} priority sizes="(max-width: 700px) 250px, 380px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
           </div>
@@ -246,10 +246,10 @@ export default function DarmowaZagadkaPage() {
           </div>
         </section>
         <section className="together-band"><div className="wrap"><p className="section-label">Na podłodze, przy stole, razem</p><h2>Odłóżcie ekrany.<br /><em>Rozłóżcie wskazówki.</em></h2><p>Wydrukowane materiały, ołówek i ciekawość wystarczą na początek. Możesz czytać wspólnie z dzieckiem albo dać mu przestrzeń na własne pomysły.</p><a href="#formularz" data-analytics-event="click_download_puzzle" data-analytics-category="lead" data-analytics-label="landing_jump_to_form" data-analytics-location="landing_no_screen" className="text-link">Pobierz darmowe śledztwo <ArrowRight size={19} aria-hidden="true" /></a></div></section>
-        <section className="wrap section-space bottom-form-section" id="formularz" aria-label="Pobierz darmową zagadkę PDF – formularz">
+        <section className="wrap section-space bottom-form-section" id="formularz" aria-label="Pobierz darmową zagadkę PDF - formularz">
           <div><p className="section-label">Gotowi na pierwszy trop?</p><h2>Przygoda zaczyna się<br /><em>w Waszej skrzynce.</em></h2><p>Podaj e-mail, aby otrzymać darmową zagadkę i wiadomości z Akademii.</p></div><div><MailerLiteForm variant="light" /></div>
         </section>
-        <section className="wrap faq-section section-space" aria-label="FAQ – darmowa zagadka detektywistyczna PDF"><div><p className="section-label">Dobrze wiedzieć</p><h2>Masz pytania?</h2><a href="mailto:pomoc@malydetektyw.pl" className="text-link">Napisz do nas <ArrowRight size={18} aria-hidden="true" /></a></div><div className="faq-list">{faqItems.map(item=><details key={item.q}><summary>{item.q}<Plus size={20} aria-hidden="true" /></summary><p>{item.a}</p></details>)}</div></section>
+        <section className="wrap faq-section section-space" aria-label="FAQ - darmowa zagadka detektywistyczna PDF"><div><p className="section-label">Dobrze wiedzieć</p><h2>Masz pytania?</h2><a href="mailto:pomoc@malydetektyw.pl" className="text-link">Napisz do nas <ArrowRight size={18} aria-hidden="true" /></a></div><div className="faq-list">{faqItems.map(item=><details key={item.q}><summary>{item.q}<Plus size={20} aria-hidden="true" /></summary><p>{item.a}</p></details>)}</div></section>
       </main>
       <Footer />
     </>

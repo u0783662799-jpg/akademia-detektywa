@@ -11,18 +11,18 @@ import { articles } from "./articles";
 export const metadata: Metadata = {
   title: "Blog o zagadkach i zabawie dla dzieci",
   description:
-    "Porady dla rodziców: zagadki logiczne, zabawa bez ekranu, śledztwa dla dzieci. Sprawdzone pomysły na aktywny czas z dziećmi 8–12 lat.",
+    "Porady dla rodziców: zagadki logiczne, zabawa bez ekranu, śledztwa dla dzieci. Sprawdzone pomysły na aktywny czas z dziećmi 8-12 lat.",
   alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
-    title: "Blog – Akademia Małego Detektywa",
-    description: "Pomysły na zabawę, zagadki i śledztwa dla dzieci 8–12 lat.",
+    title: "Blog - Akademia Małego Detektywa",
+    description: "Pomysły na zabawę, zagadki i śledztwa dla dzieci 8-12 lat.",
     url: `${SITE_URL}/blog`,
     images: [SOCIAL_IMAGE],
   },
   twitter: {
     card: "summary",
     title: "Blog o zagadkach i zabawie dla dzieci",
-    description: "Pomysły na zabawę, zagadki i śledztwa dla dzieci 8–12 lat.",
+    description: "Pomysły na zabawę, zagadki i śledztwa dla dzieci 8-12 lat.",
     images: [SOCIAL_IMAGE.url],
   },
 };

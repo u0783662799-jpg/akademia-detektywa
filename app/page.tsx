@@ -39,10 +39,10 @@ export default function HomePage() {
         <section className="adventure-hero">
           <Image src="/iwo-hero.webp" alt="" fill priority sizes="100vw" className="hero-scene" />
           <div className="wrap hero-content">
-            <p className="section-label">Papierowe przygody dla dzieci 8–12 lat</p>
+            <p className="section-label">Papierowe przygody dla dzieci 8-12 lat</p>
             <h1>Akademia <br />Małego<br /><em>Detektywa.</em></h1>
             <p className="hero-deck">Małe tropy. Wielka wyobraźnia.<br />Przygoda, która zbliża.</p>
-            <p className="hero-copy">Tu zwykły stół staje się biurem śledczym. Detektyw IWO towarzyszy Wam w przygodzie, a dziecko łączy tropy i odkrywa rozwiązanie. Papierowe historie, własne teorie i czas razem. Bez ekranu.</p>
+            <p className="hero-copy">Tu zwykły stół staje się biurem śledczym. Detektyw IWO towarzyszy Wam w przygodzie, a dziecko łączy tropy i odkrywa rozwiązanie.</p>
             <AnalyticsLink href="/darmowa-zagadka" className="action" analyticsCategory="lead" analyticsLabel="hero_pobierz_pdf" analyticsLocation="home_hero">Rozpocznijcie pierwszą sprawę <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink>
             <p className="hero-fine">Na dobry początek: darmowa zagadka do druku.</p>
           </div>
@@ -63,7 +63,7 @@ export default function HomePage() {
         </section>
 
         <section className="case-preview section-space" id="darmowy-pdf">
-          <div className="wrap case-intro"><div><p className="section-label">W świecie Akademii</p><h2>Najciekawsze jest to,<br /><em>co odkryjecie sami.</em></h2></div><div><p>Nie zdradzimy Wam wszystkich tropów. W Akademii jest miejsce na zaskoczenie, chwilę namysłu i pomysły, na które wpadnie tylko Wasza drużyna.</p><AnalyticsLink href="/darmowa-zagadka" className="text-link" analyticsCategory="lead" analyticsLabel="home_pdf_section" analyticsLocation="home_pdf_section">Poznajcie Akademię przez darmową sprawę <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink></div><figure className="academy-first-cover"><Image src="/pdf-cover.png" alt="Okładka darmowej zagadki: Sprawa Zaginionego Klejnotu" width={1055} height={1492} sizes="180px" /><figcaption>Wasza pierwsza sprawa.</figcaption></figure></div>
+          <div className="wrap case-intro"><div><p className="section-label">W świecie Akademii</p><h2>Najciekawsze jest to,<br /><em>co odkryjecie sami.</em></h2></div><div><p>Nie zdradzimy Wam wszystkich tropów. W Akademii jest miejsce na zaskoczenie, chwilę namysłu i pomysły, na które wpadnie tylko Wasz zespół detektywów.</p><AnalyticsLink href="/darmowa-zagadka" className="text-link" analyticsCategory="lead" analyticsLabel="home_pdf_section" analyticsLocation="home_pdf_section">Poznajcie Akademię przez darmową sprawę <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink></div><figure className="academy-first-cover"><Image src="/pdf-cover.png" alt="Okładka darmowej zagadki: Sprawa Zaginionego Klejnotu" width={1055} height={1492} sizes="180px" /><figcaption>Wasza pierwsza sprawa.</figcaption></figure></div>
           <div className="wrap discovery-stories">
             <div><span className="step-number">01 / Ciekawość</span><h3>„A co jest w środku?”</h3><p>Historia zaczyna się od pytania. Dalej prowadzi Was chęć odkrycia czegoś nieznanego.</p></div>
             <div><span className="step-number">02 / Wyobraźnia</span><h3>Więcej niż kartka.</h3><p>Notatki stają się dowodami, a dom miejscem przygody. Dziecko nie ogląda historii. Bierze w niej udział.</p></div>
@@ -90,7 +90,7 @@ export default function HomePage() {
           {schemaFAQHome.mainEntity.map(item=><details key={item.name}><summary>{item.name}<Plus size={20} aria-hidden="true" /></summary><p>{item.acceptedAnswer.text}</p></details>)}
         </div></section>
 
-        <section className="free-invitation" id="kontakt"><div className="wrap"><p className="section-label">Wasza pierwsza wspólna sprawa</p><h2>Popołudnie ma<br /><em>nowy scenariusz.</em></h2><p>Sprawdźcie, czy detektywistyczna przygoda jest dla Was. Zacznijcie od darmowej zagadki do druku.</p><AnalyticsLink href="/darmowa-zagadka" className="action action-light" analyticsCategory="lead" analyticsLabel="home_newsletter_cta" analyticsLocation="home_newsletter">Odbierz darmową sprawę PDF <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink><p className="invitation-note">PDF otrzymasz po zapisie e-mail. <Link href="/polityka-prywatnosci">Polityka prywatności</Link></p></div></section>
+        <section className="free-invitation" id="kontakt"><div className="wrap"><p className="section-label">Wasza pierwsza wspólna sprawa</p><h2>Dzisiejsze popołudnie ma<br /><em>nowy scenariusz.</em></h2><p>Sprawdźcie, czy detektywistyczna przygoda jest dla Was. Zacznijcie od darmowej zagadki do druku.</p><AnalyticsLink href="/darmowa-zagadka" className="action action-light" analyticsCategory="lead" analyticsLabel="home_newsletter_cta" analyticsLocation="home_newsletter">Odbierz darmową sprawę PDF <ArrowRight size={19} aria-hidden="true" /></AnalyticsLink><p className="invitation-note">PDF otrzymasz po zapisie e-mail. <Link href="/polityka-prywatnosci">Polityka prywatności</Link></p></div></section>
       </main>
       <Footer home />
     </>

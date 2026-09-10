@@ -110,11 +110,11 @@ export default function BlogArticlePage({ params }: Props) {
       <h2>5 prostych zagadek logicznych dla dzieci 8 lat</h2>
 
       <ul>
-        <li>Co ma klucze, ale nie otwiera drzwi? — Pianino.</li>
-        <li>Im więcej zabierasz, tym większe się staje? — Dziura.</li>
-        <li>Co można złamać, choć tego nie dotkniesz? — Obietnicę.</li>
-        <li>Co ma ręce, ale nie klaszcze? — Zegar.</li>
-        <li>Co rośnie, gdy pada deszcz? — Kałuża.</li>
+        <li>Co ma klucze, ale nie otwiera drzwi? - Pianino.</li>
+        <li>Im więcej zabierasz, tym większe się staje? - Dziura.</li>
+        <li>Co można złamać, choć tego nie dotkniesz? - Obietnicę.</li>
+        <li>Co ma ręce, ale nie klaszcze? - Zegar.</li>
+        <li>Co rośnie, gdy pada deszcz? - Kałuża.</li>
       </ul>
 
       <h2>Jak zachęcić dziecko do rozwiązywania zagadek?</h2>
@@ -139,12 +139,12 @@ export default function BlogArticlePage({ params }: Props) {
         Każda sprawa zawiera szyfry, wskazówki, tropy i finałowe rozwiązanie zagadki.
       </p>
 
-      <h2>FAQ — zagadki logiczne dla dzieci</h2>
+      <h2>FAQ - zagadki logiczne dla dzieci</h2>
 
       <h3>Od jakiego wieku dziecko może rozwiązywać zagadki?</h3>
 
       <p>
-        Najprostsze zagadki logiczne można wprowadzać już od 6–7 roku życia.
+        Najprostsze zagadki logiczne można wprowadzać już od 6-7 roku życia.
         Dla dzieci 8-letnich idealne są krótkie zagadki z elementem dedukcji.
       </p>
 
@@ -203,10 +203,10 @@ export default function BlogArticlePage({ params }: Props) {
       </p>
 
       <p>
-        To jedna z najbardziej angażujących zabaw bez ekranu dla dzieci 8–12 lat.
+        To jedna z najbardziej angażujących zabaw bez ekranu dla dzieci 8-12 lat.
       </p>
 
-      <h2>FAQ — zabawa bez ekranu</h2>
+      <h2>FAQ - zabawa bez ekranu</h2>
 
       <h3>Ile czasu dziecko powinno spędzać przed ekranem?</h3>
 
@@ -268,11 +268,11 @@ export default function BlogArticlePage({ params }: Props) {
       <h2>Pomysł na wyjątkowy prezent</h2>
 
       <p>
-        Akademia Małego Detektywa tworzy gotowe papierowe śledztwa dla dzieci 8–12 lat.
+        Akademia Małego Detektywa tworzy gotowe papierowe śledztwa dla dzieci 8-12 lat.
         Dziecko otrzymuje tropy, szyfry i pełną historię do rozwiązania.
       </p>
 
-      <h2>FAQ — prezent dla dziecka 10 lat</h2>
+      <h2>FAQ - prezent dla dziecka 10 lat</h2>
 
       <h3>Co kupić dziecku zamiast kolejnej zabawki?</h3>
 
@@ -330,10 +330,10 @@ export default function BlogArticlePage({ params }: Props) {
       </p>
 
       <p>
-        To świetna forma zabawy bez ekranu dla dzieci 8–12 lat.
+        To świetna forma zabawy bez ekranu dla dzieci 8-12 lat.
       </p>
 
-      <h2>FAQ — jak ograniczyć tablet dziecku?</h2>
+      <h2>FAQ - jak ograniczyć tablet dziecku?</h2>
 
       <h3>Czy całkowity zakaz ekranu ma sens?</h3>
 

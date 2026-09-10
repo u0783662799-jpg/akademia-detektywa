@@ -22,7 +22,7 @@ export default function Hero() {
             pokój dziecka w małe biuro detektywa i daje świetną zabawę bez ekranu.
           </p>
           <div className="mt-6 hidden flex-col gap-3 sm:mt-7 sm:flex sm:flex-row">
-            {/* ✅ TU BYŁ BŁĄD – POPRAWIONE NA #kontakt */}
+            {/* ✅ TU BYŁ BŁĄD - POPRAWIONE NA #kontakt */}
             <a className="btn" href="#kontakt">Pobierz darmową zagadkę</a>
 
             <a className="dark-btn border border-white/15 bg-white/10 backdrop-blur-sm" href="/sklep">

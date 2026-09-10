@@ -4,7 +4,7 @@ export const SITE_NAME = "Akademia Małego Detektywa";
 export const DEFAULT_META = {
   title: "Zagadki detektywistyczne dla dzieci 8-12 lat | Detektyw IWO",
   description:
-    "Papierowe zagadki detektywistyczne dla dzieci 8–12 lat. Detektyw IWO towarzyszy dziecku, które analizuje tropy i odkrywa rozwiązanie. Przygoda bez ekranu i czas razem.",
+    "Papierowe zagadki detektywistyczne dla dzieci 8-12 lat. Detektyw IWO towarzyszy dziecku, które analizuje tropy i odkrywa rozwiązanie. Przygoda bez ekranu i czas razem.",
   ogImage: `${SITE_URL}/iwo-social.webp`,
   keywords:
     "zagadki detektywistyczne dla dzieci, gry detektywistyczne PDF, teczka detektywa, zagadki dla dzieci 8-12 lat, zabawa bez ekranu, śledztwa dla dzieci",
@@ -14,7 +14,7 @@ export const SOCIAL_IMAGE = {
   url: DEFAULT_META.ogImage,
   width: 630,
   height: 630,
-  alt: "Akademia Małego Detektywa – Detektyw IWO",
+  alt: "Akademia Małego Detektywa - Detektyw IWO",
 };
 
 export const schemaOrganization = {
@@ -48,7 +48,7 @@ export const schemaFAQHome = {
       name: "Dla jakiego wieku są zagadki Akademii Małego Detektywa?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nasze sprawy są przeznaczone dla dzieci w wieku 8–12 lat i podzielone na trzy poziomy trudności: łatwy (8 lat), średni (9–10 lat) i trudny (11–12 lat).",
+        text: "Nasze sprawy są przeznaczone dla dzieci w wieku 8-12 lat i podzielone na trzy poziomy trudności: łatwy (8 lat), średni (9-10 lat) i trudny (11-12 lat).",
       },
     },
     {
@@ -56,7 +56,7 @@ export const schemaFAQHome = {
       name: "Czy dziecko może rozwiązać sprawę samodzielnie?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Tak, sprawy są zaprojektowane tak, by dziecko mogło działać samodzielnie. Starsze dzieci (10–12 lat) zazwyczaj dają radę solo — młodszym może towarzyszyć rodzic jako partner w śledztwie.",
+        text: "Tak, sprawy są zaprojektowane tak, by dziecko mogło działać samodzielnie. Starsze dzieci (10-12 lat) zazwyczaj dają radę solo - młodszym może towarzyszyć rodzic jako partner w śledztwie.",
       },
     },
     {
@@ -80,7 +80,7 @@ export const schemaFAQHome = {
       name: "Czy to jest zabawa bez ekranu?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Tak! Wszystkie teczki detektywistyczne to w 100% zabawa bez ekranu. Dziecko pracuje z papierowymi materiałami, szyframi i wskazówkami — bez tabletu, telefonu ani komputera.",
+        text: "Tak! Wszystkie teczki detektywistyczne to w 100% zabawa bez ekranu. Dziecko pracuje z papierowymi materiałami, szyframi i wskazówkami - bez tabletu, telefonu ani komputera.",
       },
     },
     {

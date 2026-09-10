@@ -31,7 +31,7 @@ export default function Header({ active = "home", cta }: HeaderProps) {
     }}>
       <a href="#main-content" className="skip-link">Przejdź do treści</a>
       <div className="site-header-inner">
-        <Link href="/" className="brand" aria-label="Akademia Małego Detektywa – strona główna">
+        <Link href="/" className="brand" aria-label="Akademia Małego Detektywa - strona główna">
           <Image src="/iwo-logo.png" alt="" width={48} height={48} sizes="48px" />
           <span><small>Akademia</small><strong>Małego Detektywa</strong></span>
         </Link>
