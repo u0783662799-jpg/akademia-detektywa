@@ -47,7 +47,7 @@ export default function ContactPage() {
             <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
               <div className="mb-8 w-full max-w-2xl md:mb-12">
                 <Image
-                  src="/kontakt-mess.png"
+                  src="/iwo-logo.png"
                   alt="Kontakt na Messengerze - Akademia Małego Detektywa"
                   width={900}
                   height={900}

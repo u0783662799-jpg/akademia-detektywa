@@ -45,7 +45,7 @@ const schemaProduct = {
   "@type": "Product",
   name: "Darmowa zagadka detektywistyczna PDF - Sprawa Zaginionego Klejnotu",
   description: "Bezpłatna teczka śledcza PDF dla dzieci 8-10 lat. Zawiera sprawę, tropy, podejrzanych i zadanie finałowe.",
-  image: `${SITE_URL}/pdf-cover.png`,
+  image: `${SITE_URL}/iwo-pdf-cover.webp`,
   brand: { "@type": "Brand", name: "Akademia Małego Detektywa" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "PLN", availability: "https://schema.org/InStock", url: `${SITE_URL}/darmowa-zagadka` },
 };
@@ -235,14 +235,14 @@ export default function DarmowaZagadkaPage() {
               <MailerLiteForm variant="dark" />
               <p className="form-footnote">Do wydruku w domu · Zabawa bez ekranu · 45-90 minut</p>
             </div>
-            <figure className="free-hero-art"><Image src="/pdf-cover.png" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={1055} height={1492} priority sizes="(max-width: 700px) 250px, 380px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
+            <figure className="free-hero-art"><Image src="/iwo-pdf-cover.webp" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={990} height={1400} priority sizes="(max-width: 700px) 250px, 380px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
           </div>
         </section>
         <section className="wrap section-space free-materials" aria-label="Co zawiera darmowa zagadka PDF">
           <div className="section-intro"><p className="section-label">Zajrzyj do środka</p><h2>Nie pusta kartka.<br /><em>Cała tajemnica.</em></h2><p>Opis sprawy, mapa, podejrzani i tropy. Dziecko obserwuje, porównuje wskazówki i zapisuje własne wnioski.</p></div>
           <div className="actual-pages">
-            <figure><Image src="/puzzle-map.webp" alt="Mapa zamku z darmowego PDF: galeria, biblioteka, ogród i ślady" width={708} height={1000} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Mapa zamku</span>Gdzie szukać kolejnej wskazówki?</figcaption></figure>
-            <figure><Image src="/puzzle-suspects.webp" alt="Lista podejrzanych i miejsce na wnioski dziecka, strona darmowego PDF" width={708} height={1000} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Fakty i poszlaki</span>Nie wszystko jest takie, jak się wydaje.</figcaption></figure>
+            <figure><Image src="/iwo-puzzle-map.webp" alt="Mapa zamku z darmowego PDF: galeria, biblioteka, ogród i ślady" width={990} height={1400} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Mapa zamku</span>Gdzie szukać kolejnej wskazówki?</figcaption></figure>
+            <figure><Image src="/iwo-puzzle-suspects.webp" alt="Lista podejrzanych i miejsce na wnioski dziecka, strona darmowego PDF" width={990} height={1400} sizes="(max-width: 700px) 85vw, 330px" /><figcaption><span>Fakty i poszlaki</span>Nie wszystko jest takie, jak się wydaje.</figcaption></figure>
           </div>
         </section>
         <section className="together-band"><div className="wrap"><p className="section-label">Na podłodze, przy stole, razem</p><h2>Odłóżcie ekrany.<br /><em>Rozłóżcie wskazówki.</em></h2><p>Wydrukowane materiały, ołówek i ciekawość wystarczą na początek. Możesz czytać wspólnie z dzieckiem albo dać mu przestrzeń na własne pomysły.</p><a href="#formularz" data-analytics-event="click_download_puzzle" data-analytics-category="lead" data-analytics-label="landing_jump_to_form" data-analytics-location="landing_no_screen" className="text-link">Pobierz darmowe śledztwo <ArrowRight size={19} aria-hidden="true" /></a></div></section>

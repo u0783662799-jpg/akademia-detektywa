@@ -85,7 +85,7 @@ export default function BlogArticlePage({ params }: Props) {
           </time>
         </header>
 
-        {article.image ? <figure className="article-photo article-photo-hero"><Image {...article.image} priority sizes="(max-width: 900px) 90vw, 900px" /></figure> : <figure className="article-material"><Image src="/puzzle-map.webp" alt="Mapa zamku z darmowej Sprawy Zaginionego Klejnotu" width={708} height={1000} sizes="(max-width: 700px) 85vw, 380px" /><figcaption>Od pomysłu do wspólnej zabawy.<br /><em>Fragment naszej darmowej sprawy PDF.</em></figcaption></figure>}
+        {article.image ? <figure className="article-photo article-photo-hero"><Image {...article.image} priority sizes="(max-width: 900px) 90vw, 900px" /></figure> : <figure className="article-material"><Image src="/iwo-puzzle-map.webp" alt="Mapa zamku z darmowej Sprawy Zaginionego Klejnotu" width={990} height={1400} sizes="(max-width: 700px) 85vw, 380px" /><figcaption>Od pomysłu do wspólnej zabawy.<br /><em>Fragment naszej darmowej sprawy PDF.</em></figcaption></figure>}
 
         <div className="article-body prose prose-navy max-w-none prose-headings:font-display prose-p:text-navy/80 prose-li:text-navy/80">
 
