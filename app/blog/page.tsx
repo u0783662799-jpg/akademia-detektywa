@@ -37,7 +37,7 @@ export default function BlogPage() {
         <header className="wrap editorial-heading"><p className="section-label">Dla ciekawych dzieci i ich rodziców</p><h1>Notatnik <em>rodzica.</em></h1><p>Pomysły na zagadki, zabawę bez ekranu i takie popołudnia, które chce się powtórzyć.</p></header>
         <section className="wrap journal" aria-label="Artykuły dla rodziców">
           <article className="journal-feature">
-            <Link href={`/blog/${featured.slug}`} className="journal-image" aria-label={featured.title}><Image src="/puzzle-suspects.webp" alt="Podejrzani i wskazówki z darmowej sprawy PDF Akademii" width={708} height={1000} priority sizes="(max-width: 700px) 90vw, 430px" /></Link>
+            <Link href={`/blog/${featured.slug}`} className={`journal-image${featured.image ? " journal-image-photo" : ""}`} aria-label={featured.title}><Image src={featured.image?.src ?? "/puzzle-suspects.webp"} alt={featured.image?.alt ?? "Podejrzani i wskazówki z darmowej sprawy PDF Akademii"} width={featured.image?.width ?? 708} height={featured.image?.height ?? 1000} priority sizes="(max-width: 700px) 90vw, 430px" /></Link>
             <div><p className="section-label">{featured.category} · {featured.readTime} czytania</p><h2><Link href={`/blog/${featured.slug}`}>{featured.title}</Link></h2><p>{featured.desc}</p><time dateTime={featured.date}>{new Date(featured.date).toLocaleDateString("pl-PL",{ day:"numeric",month:"long",year:"numeric" })}</time><Link href={`/blog/${featured.slug}`} className="text-link">Przeczytaj artykuł <ArrowRight size={18} aria-hidden="true" /></Link></div>
           </article>
           <div className="journal-list">

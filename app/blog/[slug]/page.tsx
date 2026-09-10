@@ -8,6 +8,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowRight } from "lucide-react";
+import DevelopmentArticle from "../development-article";
 
 interface Props {
   params: { slug: string };
@@ -30,9 +31,9 @@ export function generateMetadata({ params }: Props): Metadata {
       type: "article",
       url: `${SITE_URL}/blog/${article.slug}`,
       publishedTime: article.date,
-      images: [SOCIAL_IMAGE],
+      images: [article.image ? { url: `${SITE_URL}${article.image.src}`, width: article.image.width, height: article.image.height, alt: article.image.alt } : SOCIAL_IMAGE],
     },
-    twitter: { card: "summary", title: article.title, description: article.desc, images: [SOCIAL_IMAGE.url] },
+    twitter: { card: article.image ? "summary_large_image" : "summary", title: article.title, description: article.desc, images: [article.image ? `${SITE_URL}${article.image.src}` : SOCIAL_IMAGE.url] },
   };
 }
 
@@ -46,6 +47,7 @@ export default function BlogArticlePage({ params }: Props) {
     headline: article.title,
     description: article.desc,
     datePublished: article.date,
+    ...(article.image && { image: `${SITE_URL}${article.image.src}` }),
     author: { "@type": "Organization", name: "Akademia Małego Detektywa" },
     publisher: {
       "@type": "Organization",
@@ -83,9 +85,11 @@ export default function BlogArticlePage({ params }: Props) {
           </time>
         </header>
 
-        <figure className="article-material"><Image src="/puzzle-map.webp" alt="Mapa zamku z darmowej Sprawy Zaginionego Klejnotu" width={708} height={1000} sizes="(max-width: 700px) 85vw, 380px" /><figcaption>Od pomysłu do wspólnej zabawy.<br /><em>Fragment naszej darmowej sprawy PDF.</em></figcaption></figure>
+        {article.image ? <figure className="article-photo article-photo-hero"><Image {...article.image} priority sizes="(max-width: 900px) 90vw, 900px" /></figure> : <figure className="article-material"><Image src="/puzzle-map.webp" alt="Mapa zamku z darmowej Sprawy Zaginionego Klejnotu" width={708} height={1000} sizes="(max-width: 700px) 85vw, 380px" /><figcaption>Od pomysłu do wspólnej zabawy.<br /><em>Fragment naszej darmowej sprawy PDF.</em></figcaption></figure>}
 
         <div className="article-body prose prose-navy max-w-none prose-headings:font-display prose-p:text-navy/80 prose-li:text-navy/80">
+
+  {article.slug === "gry-logiczne-zagadki-detektywistyczne-rozwoj-dziecka" && <DevelopmentArticle />}
 
   {article.slug === "zagadki-logiczne-dla-dzieci-8-lat" && (
     <>
