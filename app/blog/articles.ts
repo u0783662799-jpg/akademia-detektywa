@@ -4,6 +4,9 @@ export interface Article {
   slug: string;
   title: string;
   desc: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  relatedSlugs: string[];
   category: string;
   date: string;
   readTime: string;
@@ -14,6 +17,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "gry-logiczne-zagadki-detektywistyczne-rozwoj-dziecka",
+    relatedSlugs: ["jak-rozwijac-logiczne-myslenie-u-dziecka", "zabawy-rozwijajace-dla-dzieci"],
     title: "Jak gry logiczne i zagadki detektywistyczne wpływają na rozwój dziecka?",
     desc: "Koncentracja, samodzielność, spostrzegawczość i wspólny czas bez ekranu. Sprawdź, co dziecko może ćwiczyć podczas rozwiązywania detektywistycznej sprawy.",
     category: "Rozwój przez zabawę",

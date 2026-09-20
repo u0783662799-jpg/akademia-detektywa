@@ -3,6 +3,8 @@ import type { Article } from "./articles";
 export const newArticles: Article[] = [
   {
     "slug": "jak-rozwijac-spostrzegawczosc-u-dziecka",
+    "seoDescription": "Jak rozwijać spostrzegawczość u dziecka? Poznaj 7 prostych zabaw z obserwacją, pamięcią i tropami, które wykorzystasz w domu lub na spacerze.",
+    "relatedSlugs": ["jak-cwiczyc-koncentracje-u-dziecka", "jak-rozwijac-logiczne-myslenie-u-dziecka"],
     "title": "Jak rozwijać spostrzegawczość u dziecka? 7 prostych sposobów",
     "desc": "Spostrzegawczość to umiejętność zauważania szczegółów, które łatwo przeoczyć. Przydaje się podczas nauki, czytania i codziennych sytuacji. Najłatwiej ćwiczyć ją poprzez zabawę, która daje dziecku konkretny powód do uważnej obserwacji.",
     "category": "Rozwój przez zabawę",
@@ -95,6 +97,9 @@ export const newArticles: Article[] = [
   },
   {
     "slug": "zabawy-rozwijajace-dla-dzieci",
+    "seoTitle": "Zabawy rozwijające dla dzieci - myślenie i odkrywanie",
+    "seoDescription": "Jak wybrać zabawy rozwijające dla dzieci? Sprawdź, jak zagadki, odkrywanie tropów i samodzielne decyzje angażują dziecko we wspólną zabawę.",
+    "relatedSlugs": ["gry-logiczne-zagadki-detektywistyczne-rozwoj-dziecka", "samodzielne-rozwiazywanie-problemow-u-dziecka"],
     "title": "Dlaczego dzieci potrzebują zabawy, która wymaga myślenia?",
     "desc": "Zabawa może służyć odpoczynkowi, ruchowi, kontaktowi z innymi, ale również stawiać dziecku ciekawe wyzwania. Gdy trzeba coś odkryć, zaplanować lub rozwiązać, dziecko przestaje być jedynie odbiorcą gotowych treści i zaczyna aktywnie działać.",
     "category": "Rozwój przez zabawę",
@@ -163,6 +168,9 @@ export const newArticles: Article[] = [
   },
   {
     "slug": "jak-cwiczyc-koncentracje-u-dziecka",
+    "seoTitle": "Jak ćwiczyć koncentrację u dziecka przez zabawę?",
+    "seoDescription": "Jak ćwiczyć koncentrację u dziecka bez kolejnych kart pracy? Poznaj rolę ciekawości, zagadek i zabawy w detektywa w skupianiu uwagi.",
+    "relatedSlugs": ["jak-rozwijac-spostrzegawczosc-u-dziecka", "zabawy-rozwijajace-dla-dzieci"],
     "title": "Jak ćwiczyć koncentrację u dziecka bez dodatkowych ćwiczeń i kart pracy?",
     "desc": "Koncentracja jest potrzebna podczas nauki, czytania, wykonywania poleceń i rozwiązywania codziennych problemów. Nie oznacza to jednak, że jej ćwiczenie musi polegać na kolejnych zadaniach przy biurku. Dziecku często łatwiej skupić uwagę wtedy, gdy naprawdę chce dowiedzieć się, co wydarzy się dalej.",
     "category": "Rozwój przez zabawę",
@@ -231,6 +239,8 @@ export const newArticles: Article[] = [
   },
   {
     "slug": "jak-rozwijac-logiczne-myslenie-u-dziecka",
+    "seoDescription": "Jak rozwijać logiczne myślenie u dziecka? Sprawdź, jak zagadki i zabawa w detektywa zachęcają do łączenia faktów oraz szukania rozwiązań.",
+    "relatedSlugs": ["samodzielne-rozwiazywanie-problemow-u-dziecka", "jak-rozwijac-spostrzegawczosc-u-dziecka"],
     "title": "Jak rozwijać logiczne myślenie u dziecka poprzez zabawę?",
     "desc": "Logiczne myślenie pomaga dziecku analizować informacje, dostrzegać zależności i samodzielnie dochodzić do rozwiązania. Nie musi jednak kojarzyć się z dodatkowymi ćwiczeniami czy szkolnymi zadaniami. Jednym z najbardziej naturalnych sposobów jego wspierania jest dobrze dobrana zabawa.",
     "category": "Rozwój przez zabawę",
@@ -299,6 +309,9 @@ export const newArticles: Article[] = [
   },
   {
     "slug": "samodzielne-rozwiazywanie-problemow-u-dziecka",
+    "seoTitle": "Samodzielne rozwiązywanie problemów u dziecka - jak wspierać?",
+    "seoDescription": "Jak wspierać samodzielne rozwiązywanie problemów u dziecka? Sprawdź, kiedy podpowiadać i jak pozwolić dziecku szukać własnych rozwiązań w zabawie.",
+    "relatedSlugs": ["jak-rozwijac-logiczne-myslenie-u-dziecka", "zabawy-rozwijajace-dla-dzieci"],
     "title": "Dlaczego warto rozwijać u dziecka umiejętność samodzielnego rozwiązywania problemów?",
     "desc": "Dziecko każdego dnia spotyka sytuacje, w których nie zna od razu odpowiedzi. To właśnie wtedy może uczyć się analizowania problemu, szukania różnych możliwości i podejmowania własnych decyzji. Samodzielne rozwiązywanie problemów warto wspierać w bezpiecznych sytuacjach, w których pomyłka jest po prostu częścią zabawy.",
     "category": "Rozwój przez zabawę",
@@ -366,4 +379,3 @@ export const newArticles: Article[] = [
     ]
   }
 ];
-

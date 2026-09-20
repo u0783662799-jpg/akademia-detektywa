@@ -21,19 +21,21 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const article = articles.find((a) => a.slug === params.slug);
   if (!article) return {};
+  const title = article.seoTitle ?? article.title;
+  const description = article.seoDescription ?? article.desc;
   return {
-    title: article.title,
-    description: article.desc,
+    title,
+    description,
     alternates: { canonical: `${SITE_URL}/blog/${article.slug}` },
     openGraph: {
-      title: article.title,
-      description: article.desc,
+      title,
+      description,
       type: "article",
       url: `${SITE_URL}/blog/${article.slug}`,
       publishedTime: article.date,
       images: [article.image ? { url: `${SITE_URL}${article.image.src}`, width: article.image.width, height: article.image.height, alt: article.image.alt } : SOCIAL_IMAGE],
     },
-    twitter: { card: article.image ? "summary_large_image" : "summary", title: article.title, description: article.desc, images: [article.image ? `${SITE_URL}${article.image.src}` : SOCIAL_IMAGE.url] },
+    twitter: { card: article.image ? "summary_large_image" : "summary", title, description, images: [article.image ? `${SITE_URL}${article.image.src}` : SOCIAL_IMAGE.url] },
   };
 }
 
@@ -105,7 +107,14 @@ export default function BlogArticlePage({ params }: Props) {
           </AnalyticsLink>
         </section>
 
-        <section className="related-reading"><p className="section-label">Jeszcze jeden pomysł na wspólny czas</p>{articles.filter(a=>a.slug!==article.slug).slice(0,2).map(a=><Link key={a.slug} href={`/blog/${a.slug}`}>{a.title}<ArrowRight size={20} aria-hidden="true" /></Link>)}</section>
+        <section className="related-reading">
+          <p className="section-label">Jeszcze jeden pomysł na wspólny czas</p>
+          {article.relatedSlugs.map(slug => {
+            const related = articles.find(a => a.slug === slug);
+            if (!related || related.slug === article.slug) return null;
+            return <Link key={related.slug} href={`/blog/${related.slug}`}>{related.title}<ArrowRight size={20} aria-hidden="true" /></Link>;
+          })}
+        </section>
 
         <div className="mt-10">
           <Link href="/blog" className="text-orange font-semibold hover:underline">← Wróć do bloga</Link>

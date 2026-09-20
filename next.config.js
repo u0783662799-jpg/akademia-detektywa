@@ -43,6 +43,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/blog/gry-logiczne-zagadki-detektywistyczne-rozwoj-dziecko",
+        destination: "/blog/gry-logiczne-zagadki-detektywistyczne-rozwoj-dziecka",
+        permanent: true,
+      },
+      {
         source: "/blog/zagadki-logiczne-dla-dzieci-8-lat",
         destination: "/blog/jak-rozwijac-logiczne-myslenie-u-dziecka",
         permanent: true,
