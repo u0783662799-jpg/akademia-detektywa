@@ -242,6 +242,9 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 18px; }
 }
 @media(min-width: 1201px) { .mobile-nav { display: none; } }
 @media(max-width: 700px) {
+  .case-preview::before, .coming-band::before {
+    background-image: url('/_next/image?url=%2Fiwo-next-chapter.webp&w=750&q=75');
+  }
   .wrap { width: calc(100% - 40px); }.section-space { padding-block: 52px; }
   h2 { font-size: 32px; }.section-label { font-size: 11px; margin-bottom: 14px; }
   .site-header-inner { width: calc(100% - 32px); min-height: 72px; gap: 10px; }

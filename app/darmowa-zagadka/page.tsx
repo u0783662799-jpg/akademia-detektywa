@@ -276,7 +276,7 @@ export default function DarmowaZagadkaPage() {
               <MailerLiteForm variant="dark" />
               <p className="form-footnote">Do wydruku w domu · Zabawa bez ekranu · 45-90 minut</p>
             </div>
-            <figure className="free-hero-art"><Image src="/iwo-pdf-cover.webp" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={990} height={1400} priority sizes="(max-width: 700px) 250px, 380px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
+            <figure className="free-hero-art"><Image src="/iwo-pdf-cover.webp" alt="Okładka darmowej Sprawy Zaginionego Klejnotu" width={990} height={1400} priority sizes="(max-width: 700px) 220px, (max-width: 1224px) calc(30vw - 19.2px), 348px" /><figcaption>Wasza pierwsza sprawa.<br /><em>Od niej wszystko się zaczyna.</em></figcaption></figure>
           </div>
         </section>
         <section className="wrap section-space free-materials" aria-label="Co zawiera darmowa zagadka PDF">
