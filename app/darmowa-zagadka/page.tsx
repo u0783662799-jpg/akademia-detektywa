@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowRight, Plus } from "lucide-react";
 import { SITE_URL } from "@/lib/seo";
+import MailerLiteReady from "@/components/MailerLiteReady";
 
 export { metadata } from "./metadata";
 
@@ -89,6 +90,8 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
                       id={`puzzle-email-${variant}`}
                       aria-label="email"
                       aria-required="true"
+                      required
+                      aria-describedby={`puzzle-email-error-${variant}`}
                       type="email"
                       className={`form-control w-full rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-gold mb-3 ${
                         isDark
@@ -99,6 +102,7 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
                       placeholder="twoj@email.pl"
                       autoComplete="email"
                     />
+                    <p id={`puzzle-email-error-${variant}`} className="ml-field-error-message text-sm" aria-live="polite" />
                   </div>
                 </div>
               </div>
@@ -106,7 +110,7 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
               {/* Checkbox consent */}
               <div className="ml-form-checkboxRow ml-validate-required mb-4">
                 <label className="checkbox flex items-start gap-3 cursor-pointer">
-                  <input type="checkbox" className="mt-1 w-4 h-4 accent-gold flex-shrink-0" />
+                  <input type="checkbox" required className="mt-1 w-4 h-4 accent-gold flex-shrink-0" />
                   <p className={`text-xs leading-relaxed ${isDark ? "text-cream/60" : "text-navy/50"}`}>
                     Chcę otrzymać darmową zagadkę detektywa oraz wiadomości o nowych sprawach i produktach Akademii Małego Detektywa.
                   </p>
@@ -126,9 +130,12 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
               <input type="hidden" name="anticsrf" value="true" />
 
               {/* Submit */}
+              <MailerLiteReady />
+              <p className="ml-server-error d-none text-sm mb-3" role="alert" />
               <div className="ml-form-embedSubmit">
                 <button
                   type="submit"
+                  disabled
                   className="primary w-full bg-gold text-navy font-bold py-4 rounded-xl text-lg hover:bg-orange transition-colors"
                   data-analytics-event="click_download_puzzle"
                   data-analytics-category="lead"
@@ -143,7 +150,7 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
                   className="loading hidden w-full bg-gold/60 text-navy font-bold py-4 rounded-xl text-lg cursor-not-allowed"
                 >
                   <div className="inline-block w-5 h-5 border-4 border-navy/30 border-t-navy rounded-full animate-spin mr-2 align-middle" />
-                  <span className="sr-only">Wysyłanie…</span>
+                  <span>Wysyłanie...</span>
                 </button>
               </div>
             </form>
@@ -154,10 +161,10 @@ function MailerLiteForm({ variant }: { variant: "dark" | "light" }) {
             <div className="text-center py-8">
               <div className="text-5xl mb-4">🕵️‍♂️</div>
               <h2 className={`font-display text-2xl mb-2 ${isDark ? "text-gold" : "text-navy"}`}>
-                Gratulacje!
+                Gotowe!
               </h2>
               <p className={isDark ? "text-cream/70" : "text-navy/70"}>
-                Sprawdź swojego maila, aby odebrać pierwszą, darmową zagadkę!
+                Sprawdź skrzynkę e-mail, aby odebrać darmową zagadkę. Jeśli nie widzisz wiadomości, zajrzyj także do folderu SPAM.
               </p>
             </div>
           </div>
@@ -184,23 +191,57 @@ export default function DarmowaZagadkaPage() {
         var submittedForms = new WeakSet();
         var completedForms = new WeakSet();
         var configuredClients = new WeakSet();
-        var requestSequence = 0;
+        var submittingForm = null;
+        var pendingForm = null;
         document.addEventListener("submit", function(event) {
           var form = event.target;
           if (!form || !form.matches || !form.matches(".ml-block-form[data-analytics-success-event]")) return;
+          // MailerLite uses one JSONP callback. Never let two embeds overwrite it.
+          if (pendingForm) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return;
+          }
 
           var client = window.ml_jQuery;
           if (client && !configuredClients.has(client)) {
-            // Run before jQuery's JSONP prefilter to isolate concurrent embed responses.
+            // Preserve the provider's JSONP callback and serialize the two embeds.
             client.ajaxPrefilter("+jsonp", function(options) {
               var url = new URL(options.url, window.location.href);
               if (url.origin === "https://assets.mailerlite.com" &&
                   url.pathname === "/jsonp/2316254/forms/186553076507739391/subscribe") {
-                options.jsonpCallback = "amdMlResponse_" + (++requestSequence);
+                // Keep MailerLite's transport and success handling; only add readable errors.
+                var success = options.success;
+                var error = options.error;
+                var complete = options.complete;
+                // Capture the form when AJAX starts, before another embed can submit.
+                var currentForm = submittingForm;
+                pendingForm = currentForm;
+                var otherButtons = Array.from(document.querySelectorAll(".ml-block-form[data-analytics-success-event] button.primary"))
+                  .filter(function(button) { return button.form !== currentForm && !button.disabled; });
+                otherButtons.forEach(function(button) { button.disabled = true; });
+                var showError = function(message) {
+                  var box = currentForm && currentForm.querySelector(".ml-server-error");
+                  if (box) { box.textContent = message; box.classList.remove("d-none"); }
+                };
+                options.success = function(response) {
+                  if (typeof success === "function") success.apply(this, arguments);
+                  if (!response.success) showError("Nie udało się potwierdzić zapisu. Sprawdź dane i spróbuj ponownie.");
+                };
+                options.error = function() {
+                  if (typeof error === "function") error.apply(this, arguments);
+                  showError("Nie otrzymaliśmy potwierdzenia. Sprawdź skrzynkę e-mail, także folder SPAM. Wiadomość mogła już dotrzeć.");
+                };
+                options.complete = function() {
+                  pendingForm = null;
+                  otherButtons.forEach(function(button) { if (button.isConnected) button.disabled = false; });
+                  if (typeof complete === "function") complete.apply(this, arguments);
+                };
               }
             });
             configuredClients.add(client);
           }
+          submittingForm = form;
           submittedForms.add(form);
         }, true);
         // MailerLite derives this callback name from the embed container ID.

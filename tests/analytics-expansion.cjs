@@ -20,9 +20,10 @@ async function main() {
         const url = new URL(route.request().url());
         if (url.hostname.endsWith('mailerlite.com') && url.pathname.endsWith('/subscribe')) {
           requests++;
+          assert.equal(url.searchParams.get('callback'), 'mlWebformSubmitted');
           const reply = () => route.fulfill({
             contentType: 'text/javascript',
-            body: `${url.searchParams.get('callback')}(${JSON.stringify({ success: response !== 'failure' })});`,
+            body: `mlWebformSubmitted(${JSON.stringify({ success: response !== 'failure' })});`,
           });
           if (response === 'held') pending.push(reply);
           else await reply();
@@ -54,15 +55,14 @@ async function main() {
     for (const order of [[1, 0], [0, 1]]) {
       const s = await session(true, 'held');
       await ready(s.page);
-      await submit(s.page, 'dark');
-      await submit(s.page, 'light');
-      assert.equal((await events(s.page, 'amd_generate_lead')).length, 0, 'plain submits are not leads');
-      for (let tries = 0; s.pending.length < 2 && tries < 100; tries++) await s.page.waitForTimeout(50);
-      assert.equal(s.pending.length, 2);
-      await s.pending[order[0]]();
-      await leadCount(s.page, 1);
-      await s.pending[order[1]]();
-      await leadCount(s.page, 2);
+      for (const [index, variant] of order.map(i => ['dark', 'light'][i]).entries()) {
+        await submit(s.page, variant);
+        assert.equal((await events(s.page, 'amd_generate_lead')).length, index, 'plain submits are not leads');
+        for (let tries = 0; s.pending.length <= index && tries < 100; tries++) await s.page.waitForTimeout(50);
+        assert.equal(s.pending.length, index + 1);
+        await s.pending[index]();
+        await leadCount(s.page, index + 1);
+      }
       const leads = await events(s.page, 'amd_generate_lead');
       assert.deepEqual(leads.map(e => e.form_id), order.map(i => ['free_puzzle_hero', 'free_puzzle_bottom'][i]));
       for (const [index, variant] of order.map(i => ['dark', 'light'][i]).entries()) {
