@@ -15,8 +15,9 @@ module.exports = {
         orange: "#a93d32",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Impact", "sans-serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "serif"],
+        serif: ["var(--font-display)", "serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
       },
       boxShadow: {
         soft: "0 18px 45px rgba(6, 25, 40, 0.16)",

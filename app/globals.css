@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --font-sans: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    --font-display: Georgia, "Times New Roman", serif;
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -30,7 +25,8 @@
 :root { --ink: #263d36; --muted: #53635b; --red: #a93d32; --line: #d6dcd1; --sage: #e8eee5; }
 body { line-height: 1.65; }
 img { max-width: 100%; }
-h1,h2,h3 { text-wrap: balance; }
+h1,h2,h3 { text-wrap: balance; overflow-wrap: anywhere; }
+h3,blockquote { font-family: var(--font-display); }
 h1,h2 { font-family: var(--font-display); font-weight: 400; line-height: 1.12; }
 h2 { font-size: 42px; }
 h2 em,h1 em { font-weight: 400; color: var(--red); }
@@ -55,10 +51,8 @@ a,button,summary,input { outline-offset: 5px; }
 .skip-link:focus { top: 8px; }
 .site-header { position: sticky; top: 0; z-index: 50; background: #fafbf8; border-bottom: 1px solid var(--line); }
 .site-header-inner { width: min(1280px, calc(100% - 64px)); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; }
-.brand { display: flex; gap: 10px; align-items: center; flex-shrink: 0; line-height: 1.1; }
-.brand img { width: 42px; height: 48px; object-fit: contain; }
-.brand small { display: block; font-size: 12px; margin-bottom: 5px; }
-.brand strong { font-family: var(--font-display); font-size: 19px; font-weight: 600; }
+.brand { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 80px; height: 80px; }
+.brand img { width: 80px; height: 80px; object-fit: contain; }
 .desktop-nav { display: flex; align-items: center; gap: 26px; font-size: 14px; }
 .desktop-nav a { padding-block: 13px; }
 .desktop-nav a:hover,.desktop-nav [aria-current=page] { color: var(--red); }
@@ -248,7 +242,7 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 18px; }
   .wrap { width: calc(100% - 40px); }.section-space { padding-block: 52px; }
   h2 { font-size: 32px; }.section-label { font-size: 11px; margin-bottom: 14px; }
   .site-header-inner { width: calc(100% - 32px); min-height: 72px; gap: 10px; }
-  .brand { gap: 5px; }.brand img { width: 32px; height: 36px; }.brand strong { font-size: 15px; }.brand small { font-size: 10px; }
+  .brand, .brand img { width: 64px; height: 64px; }
   .desktop-nav { display: none; }.menu-toggle { display: flex; width: 38px; }
   .header-cta { margin-left: auto; font-size: 11px; gap: 4px; max-width: 100px; line-height: 1.25; }.header-cta svg { width: 14px; flex-shrink: 0; }
   .hero-content { padding-block: 26px 190px; }.hero-content h1 { font-size: 42px; margin-bottom: 16px; }

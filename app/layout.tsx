@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Script from "next/script";
+import { Figtree, Literata } from "next/font/google";
 import "./globals.css";
 import { DEFAULT_META, SITE_URL, SOCIAL_IMAGE, schemaOrganization, schemaWebSite } from "@/lib/seo";
 import { GTM_ID } from "@/lib/analytics";
 import CookieBanner from "@/components/CookieBanner";
 import Analytics from "@/components/Analytics";
+
+const figtree = Figtree({
+  subsets: ["latin", "latin-ext"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const literata = Literata({
+  subsets: ["latin", "latin-ext"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -46,7 +61,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl">
+    <html lang="pl" className={`${figtree.variable} ${literata.variable}`}>
       <head>
         <link rel="icon" type="image/png" href="/iwo-icon.png" />
 

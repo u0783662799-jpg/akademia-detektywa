@@ -32,8 +32,7 @@ export default function Header({ active = "home", cta }: HeaderProps) {
       <a href="#main-content" className="skip-link">Przejdź do treści</a>
       <div className="site-header-inner">
         <Link href="/" className="brand" aria-label="Akademia Małego Detektywa - strona główna">
-          <Image src="/iwo-logo.png" alt="" width={48} height={48} sizes="48px" />
-          <span><small>Akademia</small><strong>Małego Detektywa</strong></span>
+          <Image src="/iwo-nav.png" alt="" width={80} height={80} sizes="(max-width: 767px) 64px, 80px" priority />
         </Link>
         <nav className="desktop-nav" aria-label="Nawigacja główna">
           {links.map(link => <Link key={link.href} href={link.href} aria-current={path === link.href ? "page" : undefined}>{link.text}</Link>)}
